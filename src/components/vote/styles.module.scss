@@ -1,0 +1,38 @@
+.container {
+  margin: 10.5vh auto;
+  height: 168px;
+  width: 168px;
+  position: relative;
+}
+
+.vote {
+  width: 100%;
+}
+
+.red_card {
+  position: absolute;
+  top: 100px;
+  left: 12px;
+}
+
+.white_card {
+  position: relative;
+  top: -75px;
+  left: 26px;
+  overflow: hidden;
+  width: 120px;
+  height: 71px;
+}
+
+.white_card_image {
+  position: absolute;
+}
+
+.bar {
+  position: absolute;
+  width: 145px;
+  height: 10px;
+  background: var(--color-black);
+  border-radius: 8px;
+  top: 160px;
+}
