@@ -1,0 +1,36 @@
+{
+  "leftItems": [
+    {
+      "item": {
+        "label": "ホーム",
+        "href": "#"
+      }
+    },
+    {
+      "item": {
+        "label": "スレッド",
+        "href": "#"
+      }
+    },
+    {
+      "item": {
+        "label": "サービスについて",
+        "href": "#"
+      }
+    }
+  ],
+  "rightItems": [
+    {
+      "item": {
+        "label": "ログイン",
+        "href": "#"
+      }
+    },
+    {
+      "item": {
+        "label": "新規登録",
+        "href": "#"
+      }
+    }
+  ]
+}
