@@ -1,0 +1,16 @@
+$colors: (
+  white: #eae8e3,
+  black: #1f1f1f,
+);
+
+$font: (
+  small: 12px,
+  medium: 16px,
+  large: 20px,
+);
+
+:root {
+  @each $color, $value in $colors {
+    --color-#{$color}: #{$value};
+  }
+}
