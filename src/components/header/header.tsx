@@ -16,7 +16,7 @@ export const Header: FunctionComponent = () => {
           ))}
         </div>
         <div className={styles.links}>
-          {leftItems.map(({ item }) => (
+          {rightItems.map(({ item }) => (
             <a key={item.label} href={item.href} className={styles.link}>
               {item.label}
             </a>
