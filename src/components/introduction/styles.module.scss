@@ -1,0 +1,15 @@
+.container {
+  max-width: 880px;
+  margin: auto;
+}
+.text {
+  color: #1f1f1f;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 60px;
+  letter-spacing: 2px;
+
+  &:not(:last-child) {
+    margin-bottom: 56px;
+  }
+}
