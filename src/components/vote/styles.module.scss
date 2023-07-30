@@ -3,6 +3,7 @@
   height: 168px;
   width: 168px;
   position: relative;
+  z-index: -1;
 }
 
 .vote {
@@ -10,15 +11,21 @@
 }
 
 .red_card {
+  background-color: #ff5454;
+  border-radius: 8px;
   position: absolute;
-  top: 100px;
-  left: 12px;
+  top: calc(50% - -23px);
+  left: calc(50% - 59px);
+  width: 67px;
+  height: 97px;
+  transform: rotate(20deg);
+  border: 12px var(--color-black) solid;
 }
 
 .white_card {
   position: relative;
-  top: -75px;
-  left: 26px;
+  top: calc(50% + -158px);
+  left: calc(50% - 59px);
   overflow: hidden;
   width: 120px;
   height: 71px;
@@ -26,6 +33,7 @@
 
 .white_card_image {
   position: absolute;
+  top: 0;
 }
 
 .bar {
