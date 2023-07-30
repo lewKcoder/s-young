@@ -3,13 +3,13 @@
     {
       "item": {
         "label": "ホーム",
-        "href": "#"
+        "href": "/"
       }
     },
     {
       "item": {
         "label": "スレッド",
-        "href": "#"
+        "href": "/thread"
       }
     },
     {
