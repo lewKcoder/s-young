@@ -1,12 +1,14 @@
 import { FunctionComponent } from 'react';
 import styles from './styles.module.scss';
 import data from './data.json';
+import { Component } from './types';
 
-export const Header: FunctionComponent = () => {
+export const Header: Component = (props) => {
+  const { hasBlur } = props;
   const { leftItems, rightItems } = data;
 
   return (
-    <header className={styles.container}>
+    <header className={`${styles.container} ${hasBlur && styles.blur}`}>
       <nav className={styles.content}>
         <div className={styles.links}>
           {leftItems.map(({ item }) => (

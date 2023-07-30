@@ -1,5 +1,5 @@
 .container {
-  margin: 10.5vh auto;
+  margin: calc(10.5vh + 120px) auto 10.5vh;
   height: 168px;
   width: 168px;
   position: relative;

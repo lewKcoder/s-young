@@ -1,0 +1,58 @@
+.container {
+  margin-top: -104px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 56px 1fr 60px;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #acacac;
+
+  &:first-child {
+    padding-top: 96px;
+  }
+}
+
+.image_content {
+  width: 56px;
+  height: 56px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.date {
+  display: inline-block;
+  color: #797979;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.comment {
+  line-height: 1.4;
+}
+
+.action_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
+
+.like {
+  display: grid;
+  align-items: end;
+  gap: 4px;
+  grid-template-columns: 24px 1fr;
+}

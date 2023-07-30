@@ -27,7 +27,7 @@ export const Vote: FunctionComponent = () => {
         scale: 0,
         width: 10,
         height: 10,
-        top: 'calc(50% - -450px)',
+        top: 'calc(50% - -420px)',
         left: 'calc(50% - 37px)',
       })
       .to('#RedCard', {
@@ -37,7 +37,7 @@ export const Vote: FunctionComponent = () => {
       });
 
     gsap.to('#WhiteCard', {
-      top: 'calc(50% - -923px)',
+      top: 'calc(50% - -863px)',
       ease: 'none',
       scrollTrigger: {
         trigger: '#WhiteCard',

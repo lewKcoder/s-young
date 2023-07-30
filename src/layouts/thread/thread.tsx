@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 export const Thread: FunctionComponent = () => {
   return (
     <>
-      <Header />
+      <Header hasBlur />
       <div className={styles.container}>
         <Tips />
         <ThreadItem />
