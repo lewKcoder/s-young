@@ -41,13 +41,14 @@
   flex-direction: column;
   justify-content: left;
   align-items: flex-start;
-  gap: 8px;
+  gap: 16px;
 }
 
 .icon {
   display: inline-block;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 .like {
