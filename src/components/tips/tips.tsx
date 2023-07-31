@@ -7,7 +7,7 @@ export const Tips: FunctionComponent = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>もっと楽しく</h2>
+      <h2 className={styles.title}>投稿フォームに変更</h2>
 
       <ul className={styles.lists}>
         {links.map(({ link }) => (
