@@ -4,13 +4,34 @@
   padding: 24px;
   height: calc(100vh - 170px);
   overflow-y: auto;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+
+.modal {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  border-radius: 0;
+  margin-left: -24px;
+  height: auto;
+}
+
+.header {
+  margin-bottom: 16px;
+  @media screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 20px;
+    align-items: center;
+  }
 }
 
 .title {
   color: var(--color-black);
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 16px;
 }
 
 .textarea {
@@ -59,4 +80,30 @@
   background-color: #b9b9b9;
   pointer-events: none;
   cursor: initial;
+}
+
+.close_button {
+  display: none;
+  width: 20px;
+  height: 20px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
+}
+
+.chat_button {
+  display: none;
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  background-image: url('/chat.png');
+  background-position: center;
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 }

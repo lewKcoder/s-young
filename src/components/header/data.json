@@ -5,18 +5,6 @@
         "label": "ホーム",
         "href": "/"
       }
-    },
-    {
-      "item": {
-        "label": "スレッド",
-        "href": "/thread"
-      }
-    },
-    {
-      "item": {
-        "label": "サービスについて",
-        "href": "/about"
-      }
     }
   ],
   "rightItems": [

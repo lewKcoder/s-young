@@ -8,9 +8,9 @@ export const ThreadItem: FunctionComponent = () => {
 
   return (
     <div className={styles.container}>
-      <ul>
+      <ul className={styles.content}>
         {lists.map(({ src, comment, date, likes }) => (
-          <li key={comment} className={styles.content}>
+          <li key={comment} className={styles.list}>
             <div className={`${styles.image_content} image`} />
             <div>
               <span className={styles.date}>{date}</span>
@@ -21,10 +21,10 @@ export const ThreadItem: FunctionComponent = () => {
                 <Image src="/prohibition.png" alt="Prohibition" />
               </span>
               <div className={styles.like}>
+                {likes && <span>{likes}</span>}
                 <span className={styles.icon}>
                   <Image src="/like.png" alt="Like" />
                 </span>
-                {likes > 0 && <span>{likes}</span>}
               </div>
             </div>
 

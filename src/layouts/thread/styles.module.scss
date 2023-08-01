@@ -2,5 +2,11 @@
   display: grid;
   grid-template-columns: 25% 1fr;
   gap: 40px;
-  padding: 104px 32px 0 16px;
+  padding: 104px 24px 0;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+
+    padding: 88px 16px 0;
+  }
 }

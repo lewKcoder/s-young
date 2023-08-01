@@ -1,7 +1,7 @@
-import { FunctionComponent } from 'react';
 import styles from './styles.module.scss';
 import data from './data.json';
 import { Component } from './types';
+import Link from 'next/link';
 
 export const Header: Component = (props) => {
   const { hasBlur } = props;
@@ -10,14 +10,20 @@ export const Header: Component = (props) => {
   return (
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>
       <nav className={styles.content}>
-        <div className={styles.links}>
+        <div className={`${styles.links} ${styles.left_items}`}>
           {leftItems.map(({ item }) => (
             <a key={item.label} href={item.href} className={styles.link}>
               {item.label}
             </a>
           ))}
         </div>
-        <div className={styles.links}>
+
+        <Link href="/thread" className={styles.site_title}>
+          <img src="/site-icon.svg" alt="" className={styles.image} />
+          <h1 className={styles.title}>SEN</h1>
+        </Link>
+
+        <div className={`${styles.links} ${styles.right_items}`}>
           {rightItems.map(({ item }) => (
             <a key={item.label} href={item.href} className={styles.link}>
               {item.label}

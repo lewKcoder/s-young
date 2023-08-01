@@ -2,9 +2,20 @@
   margin-top: -104px;
   height: 100vh;
   overflow: scroll;
+  margin-right: -24px;
+  @media screen and (max-width: 768px) {
+    margin-right: -16px;
+  }
 }
 
 .content {
+  padding-right: 24px;
+  @media screen and (max-width: 768px) {
+    padding-right: 16px;
+  }
+}
+
+.list {
   display: grid;
   grid-template-columns: 56px 1fr 60px;
   gap: 16px;
@@ -34,13 +45,17 @@
 
 .comment {
   line-height: 1.4;
+
+  @media screen and (max-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .action_content {
   display: flex;
   flex-direction: column;
   justify-content: left;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: 16px;
 }
 
@@ -55,5 +70,5 @@
   display: grid;
   align-items: end;
   gap: 4px;
-  grid-template-columns: 24px 1fr;
+  grid-template-columns: 1fr 24px;
 }
