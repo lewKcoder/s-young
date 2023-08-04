@@ -27,11 +27,14 @@ export const Comment: FunctionComponent = () => {
   const c = async () => {
     const param = {
       input: {
-        userId: Math.floor(Math.random() * 100),
+        id: Math.floor(Math.random() * 100),
+        chatId: Math.floor(Math.random() * 100),
         icon: '/sample-icon.png',
         userName: '山田たろう',
         text: $textarea.current?.value,
         date: new Date().toISOString(),
+        likes: 0,
+        prohibition: 0,
       },
     };
     try {
