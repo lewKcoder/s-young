@@ -1,184 +1,30 @@
-/* tslint:disable */
-/* eslint-disable */
-// this is an auto generated file. This will be overwritten
+import { CreateChatInput } from '@/API';
 
 export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    createUser(input: $input, condition: $condition) {
+  mutation createUser($icon: String, $userName: String!, $userId: String!, $password: String!) {
+    createUser(icon: $icon, userName: $userName, userId: $userId, password: $password) {
       id
-      name
       icon
-      chats {
-        items {
-          id
-          userId
-          date
-          text
-          likes
-          prohibitions
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
+      userName
+      userId
     }
   }
 `;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    updateUser(input: $input, condition: $condition) {
-      id
-      name
-      icon
-      chats {
-        items {
-          id
-          userId
-          date
-          text
-          likes
-          prohibitions
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    deleteUser(input: $input, condition: $condition) {
-      id
-      name
-      icon
-      chats {
-        items {
-          id
-          userId
-          date
-          text
-          likes
-          prohibitions
-          createdAt
-          updatedAt
-          __typename
-        }
-        nextToken
-        __typename
-      }
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
+
+// TypeScriptの文字列としてGraphQLのミューテーションを定義
 export const createChat = /* GraphQL */ `
-  mutation CreateChat(
-    $input: CreateChatInput!
-    $condition: ModelChatConditionInput
-  ) {
-    createChat(input: $input, condition: $condition) {
-      id
-      userId
+  mutation createChat($input: CreateChatInput!) {
+    createChat(input: $input) {
+      chatId
       user {
         id
-        name
-        icon
-        chats {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
+        userName
       }
-      date
+      icon
       text
-      likes
-      prohibitions
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const updateChat = /* GraphQL */ `
-  mutation UpdateChat(
-    $input: UpdateChatInput!
-    $condition: ModelChatConditionInput
-  ) {
-    updateChat(input: $input, condition: $condition) {
-      id
-      userId
-      user {
-        id
-        name
-        icon
-        chats {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
       date
-      text
       likes
-      prohibitions
-      createdAt
-      updatedAt
-      __typename
-    }
-  }
-`;
-export const deleteChat = /* GraphQL */ `
-  mutation DeleteChat(
-    $input: DeleteChatInput!
-    $condition: ModelChatConditionInput
-  ) {
-    deleteChat(input: $input, condition: $condition) {
-      id
-      userId
-      user {
-        id
-        name
-        icon
-        chats {
-          nextToken
-          __typename
-        }
-        createdAt
-        updatedAt
-        __typename
-      }
-      date
-      text
-      likes
-      prohibitions
-      createdAt
-      updatedAt
-      __typename
+      prohibition
     }
   }
 `;

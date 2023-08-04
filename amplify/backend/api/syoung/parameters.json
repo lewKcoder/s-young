@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "sen",
+  "AppSyncApiName": "syoung",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

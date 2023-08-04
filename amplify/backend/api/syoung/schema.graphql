@@ -5,17 +5,20 @@ input AMPLIFY {
 } # FOR TESTING ONLY!
 type User @model {
   id: ID!
-  name: String!
   icon: String
-  chats: [Chat] @hasMany(indexName: "byUser", fields: ["name"])
+  userName: String!
+  userId: String!
+  password: String!
+  chats: [Chat]
 }
 
 type Chat @model {
-  id: ID!
-  userId: ID!
-  user: User @belongsTo(fields: ["userId"])
-  date: String! @index(name: "byUser")
+  chatId: ID!
+  user: User!
+  icon: String
+  userName: String
   text: String!
-  likes: Int!
-  prohibitions: Int!
+  date: String!
+  likes: Int
+  prohibition: Boolean
 }

@@ -4,6 +4,8 @@ import { disabledStore, errorStore } from './store';
 import { useOnChange } from './utils/useOnChange';
 import styles from './styles.module.scss';
 import { Image } from '@/components/image';
+import { API, graphqlOperation } from 'aws-amplify';
+import { createChat } from '@/graphql/mutations';
 
 export const Comment: FunctionComponent = () => {
   const [modal, setModal] = useState(false);
@@ -20,6 +22,29 @@ export const Comment: FunctionComponent = () => {
 
   const handleModalClose = () => {
     setModal(false);
+  };
+
+  const c = async () => {
+    const param = {
+      input: {
+        userId: Math.floor(Math.random() * 100),
+        icon: '/sample-icon.png',
+        userName: '山田たろう',
+        text: $textarea.current?.value,
+        date: new Date().toISOString(),
+      },
+    };
+    try {
+      const chat = await API.graphql(graphqlOperation(createChat, param));
+      console.log(chat);
+    } catch (err) {
+      console.log('error creating todo:', err);
+    }
+  };
+
+  const handleCreateChat = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    c();
   };
 
   return (
@@ -43,7 +68,11 @@ export const Comment: FunctionComponent = () => {
 
         {error && <span className={styles.error}>投稿できない内容が含まれています。</span>}
 
-        <button type="submit" className={`${styles.button} ${disabled && styles.disabled}`}>
+        <button
+          type="submit"
+          className={`${styles.button} ${disabled && styles.disabled}`}
+          onClick={(e) => handleCreateChat(e)}
+        >
           投稿
         </button>
 
