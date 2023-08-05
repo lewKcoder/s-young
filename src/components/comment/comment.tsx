@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef, useState } from 'react';
+import { FunctionComponent, useEffect, useRef, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { disabledStore, errorStore } from './store';
 import { useOnChange } from './utils/useOnChange';
@@ -6,14 +6,25 @@ import styles from './styles.module.scss';
 import { Image } from '@/components/image';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createChat } from '@/graphql/mutations';
+import { Auth } from 'aws-amplify';
 
 export const Comment: FunctionComponent = () => {
   const [modal, setModal] = useState(false);
+  const [user, setUser] = useState(null);
+
   const error = useAtomValue(errorStore);
   const disabled = useAtomValue(disabledStore);
   const $textarea = useRef<HTMLTextAreaElement>(null);
 
   const onChange = useOnChange($textarea);
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((user) => {
+        setUser(user.username);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   // TODO: utilsに切り分ける
   const handleModalOpen = () => {
@@ -29,8 +40,7 @@ export const Comment: FunctionComponent = () => {
       input: {
         id: Math.floor(Math.random() * 100),
         chatId: Math.floor(Math.random() * 100),
-        icon: '/sample-icon.png',
-        userName: '山田たろう',
+        userName: user,
         text: $textarea.current?.value,
         date: new Date().toISOString(),
         likes: 0,

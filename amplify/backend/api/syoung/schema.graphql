@@ -5,17 +5,15 @@ input AMPLIFY {
 } # FOR TESTING ONLY!
 type User @model {
   id: ID!
-  icon: String
   userName: String!
   userId: String!
   password: String!
-  chats: [Chat]
+  chats: [Chat] @hasMany
 }
 
 type Chat @model {
   chatId: ID!
-  user: User!
-  icon: String
+  user: User @belongsTo
   userName: String
   text: String!
   date: String!

@@ -3,29 +3,14 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { Image } from '@/components/image';
 import styles from './styles.module.scss';
 import { API, graphqlOperation } from 'aws-amplify';
-import { getAllChats } from '@/graphql/queries';
-
-type Chat = {
-  createdAt: string;
-  date: string;
-  id: string;
-  likes: number;
-  prohibitions: number;
-  text: string;
-  updatedAt: string;
-  user: {
-    icon: string;
-  };
-  userId: string;
-  __typename: string;
-};
+import { listChats } from '@/graphql/queries';
 
 export const ThreadItem: FunctionComponent = () => {
-  const [chats, setChat] = useState<Chat[] | []>([]);
+  const [chats, setChat] = useState([]);
 
   async function getChats() {
     try {
-      const chatData = await API.graphql(graphqlOperation(getAllChats));
+      const chatData = await API.graphql(graphqlOperation(listChats));
 
       if ('data' in chatData) {
         setChat(chatData.data.listChats.items);
@@ -39,13 +24,16 @@ export const ThreadItem: FunctionComponent = () => {
     getChats();
   }, []);
 
+  console.log(chats);
+
   return (
     <div className={styles.container}>
       <ul className={styles.content}>
-        {chats.map(({ id, date, text, likes }) => (
+        {chats.map(({ id, date, text, userName, likes }) => (
           <li key={id} className={styles.list}>
             <div className={`${styles.image_content} image`} />
             <div>
+              <span>{userName}</span>
               <span className={styles.date}>{date}</span>
               <p className={styles.comment}>{text}</p>
             </div>

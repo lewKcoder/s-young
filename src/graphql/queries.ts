@@ -2,33 +2,49 @@ export const getUser = /* GraphQL */ `
   query getUser($id: ID!) {
     getUser(id: $id) {
       id
-      icon
       userName
       userId
       chats {
-        chatId
-        text
-        date
-        likes
-        prohibition
+        items {
+          chatId
+          text
+          date
+          likes
+          prohibition
+        }
       }
     }
   }
 `;
 
 export const getChat = /* GraphQL */ `
-  query getChat($chatId: ID!) {
-    getChat(chatId: $chatId) {
+  query getChat($id: ID!) {
+    getChat(id: $id) {
       chatId
       user {
         id
         userName
       }
-      icon
       text
       date
       likes
       prohibition
+    }
+  }
+`;
+
+export const listChats = /* GraphQL */ `
+  query ListChats {
+    listChats {
+      items {
+        chatId
+        userName
+        text
+        date
+        likes
+        prohibition
+      }
+      nextToken
     }
   }
 `;
