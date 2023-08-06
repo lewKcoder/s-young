@@ -1,5 +1,7 @@
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
+import { useRouter } from 'next/router';
+import { FunctionComponent, useEffect } from 'react';
 
 const formFields = {
   signIn: {
@@ -42,10 +44,19 @@ const formFields = {
   },
 };
 
+const AuthRedirect: FunctionComponent = () => {
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/thread');
+  });
+
+  return null;
+};
+
 export default function Auth({ signOut, user }: any) {
   return (
     <Authenticator formFields={formFields}>
-      {({ signOut }) => <button onClick={signOut}>Sign out</button>}
+      <AuthRedirect />
     </Authenticator>
   );
 }

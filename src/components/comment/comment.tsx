@@ -1,10 +1,12 @@
 import { FunctionComponent, useRef, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { disabledStore, errorStore, commentValueStore } from './store';
+import { userNameStore } from '@/stores/user-name';
 import { useOnChange } from './utils/useOnChange';
 import { useCreateChat } from './utils/useCreateChat';
-import styles from './styles.module.scss';
 import { Image } from '@/components/image';
+import styles from './styles.module.scss';
+import Link from 'next/link';
 
 export const Comment: FunctionComponent = () => {
   const [modal, setModal] = useState(false);
@@ -13,6 +15,7 @@ export const Comment: FunctionComponent = () => {
   const disabled = useAtomValue(disabledStore);
   const commentValue = useAtomValue(commentValueStore);
   const error = useAtomValue(errorStore);
+  const userName = useAtomValue(userNameStore);
   const $textarea = useRef<HTMLTextAreaElement>(null);
 
   const onChange = useOnChange($textarea);
@@ -38,18 +41,34 @@ export const Comment: FunctionComponent = () => {
           </span>
         </div>
 
-        <textarea
-          ref={$textarea}
-          cols={30}
-          rows={10}
-          className={styles.textarea}
-          onChange={onChange}
-          value={commentValue}
-        ></textarea>
+        {userName ? (
+          <textarea
+            ref={$textarea}
+            cols={30}
+            rows={10}
+            className={styles.textarea}
+            onChange={onChange}
+            value={commentValue}
+          ></textarea>
+        ) : (
+          <textarea
+            ref={$textarea}
+            cols={30}
+            rows={10}
+            className={styles.textarea}
+            placeholder="コメントの投稿にはログインが必要です。"
+            readOnly
+            disabled
+          ></textarea>
+        )}
 
         {error && <span className={styles.error}>{errorMessage}</span>}
 
-        {disabled ? (
+        {userName === null ? (
+          <Link href="/auth" className={styles.login}>
+            ログイン
+          </Link>
+        ) : disabled ? (
           <div className={styles.disabled}>投稿</div>
         ) : (
           <button
