@@ -49,13 +49,17 @@ export const Comment: FunctionComponent = () => {
 
         {error && <span className={styles.error}>{errorMessage}</span>}
 
-        <button
-          type="submit"
-          className={`${styles.button} ${disabled && styles.disabled}`}
-          onClick={(e) => createChat(e, $textarea.current?.value)}
-        >
-          投稿
-        </button>
+        {disabled ? (
+          <div className={styles.disabled}>投稿</div>
+        ) : (
+          <button
+            type="submit"
+            className={styles.button}
+            onClick={(e) => createChat(e, $textarea.current?.value)}
+          >
+            投稿
+          </button>
+        )}
 
         <div className={styles.notice}>
           <p className={styles.text}>

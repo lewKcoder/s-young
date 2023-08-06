@@ -1,3 +1,15 @@
+@mixin button-common {
+  display: block;
+  width: 80%;
+  height: 40px;
+  border-radius: 24px;
+  border: none;
+  color: var(--color-pure-white);
+  font-weight: bold;
+  font-size: 14px;
+  margin: 8px auto 24px;
+}
+
 .container {
   border-radius: 8px;
   background: #f8f4ea;
@@ -43,16 +55,10 @@
 }
 
 .button {
-  display: block;
   background-color: #61c16a;
-  width: 80%;
-  height: 40px;
-  border-radius: 24px;
-  border: none;
-  color: var(--color-pure-white);
-  font-weight: bold;
-  margin: 8px auto 24px;
   cursor: pointer;
+
+  @include button-common();
 
   &:hover {
     opacity: 0.7;
@@ -80,6 +86,10 @@
   background-color: #b9b9b9;
   pointer-events: none;
   cursor: initial;
+  text-align: center;
+  line-height: 40px;
+
+  @include button-common();
 }
 
 .close_button {
