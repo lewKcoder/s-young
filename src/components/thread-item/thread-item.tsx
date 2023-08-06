@@ -1,11 +1,16 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Image } from '@/components/image';
+import { ThreadSkeltons } from '@/components/thread-skeltons';
 import styles from './styles.module.scss';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChats } from '@/graphql/queries';
 
 export const ThreadItem: FunctionComponent = () => {
   const [chats, setChat] = useState([]);
+
+  useEffect(() => {
+    getChats();
+  }, []);
 
   async function getChats() {
     try {
@@ -18,10 +23,6 @@ export const ThreadItem: FunctionComponent = () => {
       console.log('error fetching chat:', err);
     }
   }
-
-  useEffect(() => {
-    getChats();
-  }, []);
 
   return (
     <div className={`${styles.container} ${chats.length === 0 && styles.has_loading}`}>
@@ -50,17 +51,7 @@ export const ThreadItem: FunctionComponent = () => {
           ))}
         </ul>
       ) : (
-        <div className={styles.loading}>
-          {[...Array(10)].map((_, index) => (
-            <div key={index} className={styles.skeleton}>
-              <div className={styles.skeleton_image} />
-              <div>
-                <div className={styles.skeleton_title} />
-                <div className={styles.skeleton_text} />
-              </div>
-            </div>
-          ))}
-        </div>
+        <ThreadSkeltons />
       )}
     </div>
   );

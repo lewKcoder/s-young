@@ -1,32 +1,22 @@
-import { FunctionComponent, useEffect, useRef, useState } from 'react';
-import { useAtomValue, useAtom } from 'jotai';
+import { FunctionComponent, useRef, useState } from 'react';
+import { useAtomValue } from 'jotai';
 import { disabledStore, errorStore, commentValueStore } from './store';
 import { useOnChange } from './utils/useOnChange';
+import { useCreateChat } from './utils/useCreateChat';
 import styles from './styles.module.scss';
 import { Image } from '@/components/image';
-import { API, graphqlOperation } from 'aws-amplify';
-import { createChat } from '@/graphql/mutations';
-import { Auth } from 'aws-amplify';
 
 export const Comment: FunctionComponent = () => {
   const [modal, setModal] = useState(false);
-  const [user, setUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState('投稿できない内容が含まれています。');
 
+  const disabled = useAtomValue(disabledStore);
+  const commentValue = useAtomValue(commentValueStore);
   const error = useAtomValue(errorStore);
-  const [disabled, setDisabled] = useAtom(disabledStore);
-  const [commentValue, setCommentValue] = useAtom(commentValueStore);
   const $textarea = useRef<HTMLTextAreaElement>(null);
 
   const onChange = useOnChange($textarea);
-
-  useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then((user) => {
-        setUser(user.username);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const createChat = useCreateChat();
 
   // TODO: utilsに切り分ける
   const handleModalOpen = () => {
@@ -35,44 +25,6 @@ export const Comment: FunctionComponent = () => {
 
   const handleModalClose = () => {
     setModal(false);
-  };
-
-  const getFullDate = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate() + 1;
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-
-    return `${year}/${month}/${day} ${hours}:${minutes}`;
-  };
-
-  const handleCreateChat = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    const param = {
-      input: {
-        id: Math.floor(Math.random() * 100),
-        chatId: Math.floor(Math.random() * 100),
-        userName: user,
-        text: $textarea.current?.value,
-        date: getFullDate(),
-        likes: 0,
-        prohibition: 0,
-      },
-    };
-    try {
-      await API.graphql(graphqlOperation(createChat, param));
-
-      setCommentValue('');
-      setDisabled(true);
-    } catch (err) {
-      console.log('error creating chat:', err);
-      setErrorMessage(
-        'エラーによりチャットを投稿できませんでした。しばらく時間をおいて再度お試しください。'
-      );
-    }
   };
 
   return (
@@ -100,7 +52,7 @@ export const Comment: FunctionComponent = () => {
         <button
           type="submit"
           className={`${styles.button} ${disabled && styles.disabled}`}
-          onClick={(e) => handleCreateChat(e)}
+          onClick={(e) => createChat(e, $textarea.current?.value)}
         >
           投稿
         </button>

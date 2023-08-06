@@ -1,0 +1,69 @@
+.loading {
+  width: 90%;
+  height: 100%;
+  padding-top: 108px;
+  overflow: hidden;
+}
+
+.skeleton {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  margin-bottom: 40px;
+  align-items: center;
+  gap: 16px;
+}
+
+@mixin skeleton-common {
+  background-color: #d8d8d8;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    content: '';
+    display: block;
+    background: linear-gradient(
+      90deg,
+      rgba(230, 230, 230, 0),
+      rgba(230, 230, 230, 0.4),
+      rgba(230, 230, 230, 0)
+    );
+    animation: skeleton-animation 1.2s linear infinite;
+  }
+}
+
+.skeleton_image {
+  @include skeleton-common;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.skeleton_title {
+  @include skeleton-common;
+
+  width: 100px;
+  height: 20px;
+  margin-bottom: 8px;
+}
+.skeleton_text {
+  @include skeleton-common;
+
+  width: 100%;
+  height: 40px;
+}
+
+@keyframes skeleton-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
