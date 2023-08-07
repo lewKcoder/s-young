@@ -1,4 +1,19 @@
 @use '@/styles/utils/theme';
+
+// グローバルで@importするとホームの画像スタイルが崩れるため、
+// amplifyのスタイルファイルはauthコンポーネントのスタイルファイルで読み込み
+#amplify-c {
+  position: absolute;
+  left: calc(50% - 240px);
+  top: calc(50% - 240px);
+
+  [data-amplify-authenticator] [data-amplify-router] {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+}
+
 /* 
   A very simple CSS reset
 */
