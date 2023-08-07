@@ -1,14 +1,14 @@
 import { Authenticator } from '@aws-amplify/ui-react';
 import { Image } from '@/components/image';
 import { Component } from './types';
-import { userNameStore } from '@/stores/user-name';
+import { userStore } from '@/stores/user';
 import { useAtom } from 'jotai';
 import styles from './styles.module.scss';
 import Link from 'next/link';
 
 export const Header: Component = (props) => {
   const { hasBlur } = props;
-  const [userName, setUserName] = useAtom(userNameStore);
+  const [user, setUser] = useAtom(userStore);
 
   return (
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>
@@ -34,14 +34,14 @@ export const Header: Component = (props) => {
         </Link>
 
         <div className={`${styles.links} ${styles.right_items}`}>
-          {userName ? (
+          {user ? (
             <Authenticator>
               {({ signOut }) => (
                 <a
                   onClick={() => {
                     signOut?.();
 
-                    setUserName(null);
+                    setUser(null);
                   }}
                   className={styles.link}
                 >

@@ -1,7 +1,7 @@
 import { FunctionComponent, useRef, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { disabledStore, errorStore, commentValueStore } from './store';
-import { userNameStore } from '@/stores/user-name';
+import { userStore } from '@/stores/user-name';
 import { useOnChange } from './utils/useOnChange';
 import { useCreateChat } from './utils/useCreateChat';
 import { Image } from '@/components/image';
@@ -15,7 +15,7 @@ export const Comment: FunctionComponent = () => {
   const disabled = useAtomValue(disabledStore);
   const commentValue = useAtomValue(commentValueStore);
   const error = useAtomValue(errorStore);
-  const userName = useAtomValue(userNameStore);
+  const user = useAtomValue(userStore);
   const $textarea = useRef<HTMLTextAreaElement>(null);
 
   const onChange = useOnChange($textarea);
@@ -41,7 +41,7 @@ export const Comment: FunctionComponent = () => {
           </span>
         </div>
 
-        {userName ? (
+        {user ? (
           <textarea
             ref={$textarea}
             cols={30}
@@ -64,7 +64,7 @@ export const Comment: FunctionComponent = () => {
 
         {error && <span className={styles.error}>{errorMessage}</span>}
 
-        {userName === null ? (
+        {user === null ? (
           <Link href="/auth" className={styles.login}>
             ログイン
           </Link>
