@@ -37,6 +37,12 @@ export const formFields = {
       order: 4,
     },
   },
+  confirmSignUp: {
+    confirmation_code: {
+      placeholder: '確認コードを入力',
+      label: '',
+    },
+  },
 };
 
 export const dict = {
@@ -44,6 +50,8 @@ export const dict = {
     'Sign in': 'ログイン',
     'Sign In': 'ログイン',
     'Signing In': 'ログイン中',
+    'Creating account': 'アカウント作成中',
+    'Creating Account': 'アカウント作成中',
     'Sign Out': 'サインアウト',
     'Create Account': 'アカウントを作成',
     'Incorrect username or password.': 'ユーザーネームかパスワードが正しくありません',
@@ -59,6 +67,7 @@ export const dict = {
     'Email Address *': 'メール *',
     'Phone Number *': '電話番号 *',
     'Enter your password': 'パスワードを入力',
+    'Enter your code': '確認コードを入力',
     'No account?': 'アカウントが未登録ですか？',
     'Reset password': 'パスワードをリセット',
     'User does not exist': 'ユーザーが存在しません',
@@ -93,5 +102,11 @@ export const dict = {
     'An account with the given email already exists.': 'そのメールアドレスは既に存在します',
     'Username cannot be empty': 'ユーザー名は必須です',
     'Password attempts exceeded': 'パスワード試行回数が超過しました',
+    'We Emailed You': '確認メールを送信しました',
+    'Your code is on the way. To log in, enter the code we emailed to':
+      '入力されたメールアドレスに記載のあるコードを入力してください。受信に時間がかかる場合があります。',
+    '. It may take a minute to arrive.': '受信に時間がかかる場合があります。',
+    'Invalid verification code provided, please try again.':
+      'コードが無効です。メール内容を再度確認するか、コードを再送してもう一度お試しください。',
   },
 };

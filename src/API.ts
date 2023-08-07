@@ -97,6 +97,7 @@ export type DeleteUserInput = {
 export type CreateChatInput = {
   userId: string;
   icon: string;
+  iconColor: string;
   userName: string;
   text: string;
   date: string;

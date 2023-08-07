@@ -17,6 +17,7 @@ export const ThreadItem: FunctionComponent = () => {
       const chatData = await API.graphql(graphqlOperation(listChats));
 
       if ('data' in chatData) {
+        console.log(chatData.data.listChats.items);
         setChat(chatData.data.listChats.items);
       }
     } catch (err) {
@@ -28,9 +29,9 @@ export const ThreadItem: FunctionComponent = () => {
     <div className={`${styles.container} ${chats.length === 0 && styles.has_loading}`}>
       {chats.length > 0 ? (
         <ul className={styles.content}>
-          {chats.map(({ id, date, text, userName, likes }) => (
+          {chats.map(({ id, date, text, userName, likes, iconColor }) => (
             <li key={id} className={styles.list}>
-              <div className={`${styles.image_content} image`} />
+              <div className={styles.user_icon} style={{ background: `${iconColor}` }} />
               <div>
                 <span className={styles.user}>{userName}</span>
                 <span className={styles.date}>{date}</span>

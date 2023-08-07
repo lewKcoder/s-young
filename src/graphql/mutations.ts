@@ -1,9 +1,9 @@
 export const createUser = /* GraphQL */ `
-  mutation createUser($userName: String!, $userId: String!, $password: String!) {
-    createUser(userName: $userName, userId: $userId, password: $password) {
+  mutation createUser($input: CreateUserInput!) {
+    createUser(input: $input) {
       id
       userName
-      userId
+      iconColor
     }
   }
 `;
@@ -12,10 +12,9 @@ export const createChat = /* GraphQL */ `
   mutation createChat($input: CreateChatInput!) {
     createChat(input: $input) {
       chatId
-      user {
-        id
-        userName
-      }
+      id
+      userName
+      iconColor
       text
       date
       likes

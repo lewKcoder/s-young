@@ -21,10 +21,8 @@ export const getChat = /* GraphQL */ `
   query getChat($id: ID!) {
     getChat(id: $id) {
       chatId
-      user {
-        id
-        userName
-      }
+      id
+      userName
       text
       date
       likes
@@ -38,7 +36,9 @@ export const listChats = /* GraphQL */ `
     listChats {
       items {
         chatId
+        id
         userName
+        iconColor
         text
         date
         likes

@@ -6,15 +6,17 @@ input AMPLIFY {
 type User @model {
   id: ID!
   userName: String!
-  userId: String!
-  password: String!
-  chats: [Chat] @hasMany
+  iconColor: String!
+  chats: [Chat] @hasMany(fields: ["id"])
 }
 
 type Chat @model {
+  id: ID!
+  user: User @belongsTo(fields: ["userId"])
+  userId: ID!
   chatId: ID!
-  user: User @belongsTo
-  userName: String
+  userName: String!
+  iconColor: String!
   text: String!
   date: String!
   likes: Int

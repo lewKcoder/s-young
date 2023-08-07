@@ -1,16 +1,16 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { disabledStore, commentValueStore } from '../../store';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createChat as createChatImported } from '@/graphql/mutations';
-import { userNameStore } from '@/stores/user-name';
+import { userStore } from '@/stores/user';
 
 export const useCreateChat = () => {
   const [errorMessage, setErrorMessage] = useState('投稿できない内容が含まれています。');
 
   const setDisabled = useSetAtom(disabledStore);
   const setCommentValue = useSetAtom(commentValueStore);
-  const userName = useAtomValue(userNameStore);
+  const user = useAtomValue(userStore);
 
   const createChat = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -31,9 +31,10 @@ export const useCreateChat = () => {
 
     const param = {
       input: {
-        id: Math.floor(Math.random() * 100),
-        chatId: Math.floor(Math.random() * 100),
-        userName: userName,
+        chatId: Math.floor(Math.random() * 10000),
+        userId: user.attributes.sub,
+        userName: user.username,
+        iconColor: user.attributes.profile,
         text: refElement,
         date: getFullDate(),
         likes: 0,

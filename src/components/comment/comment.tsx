@@ -1,7 +1,7 @@
 import { FunctionComponent, useRef, useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { disabledStore, errorStore, commentValueStore } from './store';
-import { userStore } from '@/stores/user-name';
+import { userStore } from '@/stores/user';
 import { useOnChange } from './utils/useOnChange';
 import { useCreateChat } from './utils/useCreateChat';
 import { Image } from '@/components/image';
