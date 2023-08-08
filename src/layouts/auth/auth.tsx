@@ -1,5 +1,6 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Header } from '@/components/header';
+import { Image } from '@/components/image';
 import { I18n } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
@@ -24,7 +25,7 @@ export const Auth: FunctionComponent = () => {
   const [color1, setColor1] = useState('');
   const [color2, setColor2] = useState('');
   const [color3, setColor3] = useState('');
-  const [selectColor, setSelectColor] = useState('');
+  const [selectColor, setSelectColor] = useState('first');
   const [iconColor, setIconColor] = useAtom(iconColorStore);
 
   function createGradientCSS() {
@@ -81,21 +82,33 @@ export const Auth: FunctionComponent = () => {
                 return (
                   <>
                     <p className="text">
-                      アイコン色:<span>＊登録後の変更はできません。</span>
+                      アイコン色を選択:<span>＊登録後の変更はできません。</span>
                     </p>
                     <div className="icons">
                       <div
                         className={'icon first'}
                         onClick={() => handlerSelectColor(color1, 'first')}
-                      />
+                      >
+                        <span className="vote">
+                          <Image src="/vote-white.svg" alt="voteWhite" />
+                        </span>
+                      </div>
                       <div
                         className="icon second"
                         onClick={() => handlerSelectColor(color2, 'second')}
-                      />
+                      >
+                        <span className="vote">
+                          <Image src="/vote-white.svg" alt="voteWhite" />
+                        </span>
+                      </div>
                       <div
                         className="icon third"
                         onClick={() => handlerSelectColor(color3, 'third')}
-                      />
+                      >
+                        <span className="vote">
+                          <Image src="/vote-white.svg" alt="voteWhite" />
+                        </span>
+                      </div>
                     </div>
                     <button onClick={setColors} className="button">
                       更新
@@ -122,6 +135,13 @@ export const Auth: FunctionComponent = () => {
             width: 64px;
             height: 64px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .vote {
+            width: 50%;
+            height: 50%;
           }
           .first {
             background: ${color1};
