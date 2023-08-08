@@ -33,62 +33,83 @@ export const Comment: FunctionComponent = () => {
   return (
     <>
       <div className={styles.chat_button} onClick={handleModalOpen} />
-      <form className={`${styles.container} ${modal && styles.modal}`}>
-        <div className={styles.header}>
-          <h2 className={styles.title}>コメント</h2>
-          <span className={styles.close_button} onClick={handleModalClose}>
-            <Image src="/close.png" alt="close" />
-          </span>
-        </div>
-
-        {user ? (
-          <textarea
-            ref={$textarea}
-            cols={30}
-            rows={10}
-            className={styles.textarea}
-            onChange={onChange}
-            value={commentValue}
-          ></textarea>
-        ) : (
-          <textarea
-            ref={$textarea}
-            cols={30}
-            rows={10}
-            className={styles.textarea}
-            placeholder="コメントの投稿にはログインが必要です。"
-            readOnly
-            disabled
-          ></textarea>
+      <div className={`${styles.container} ${modal && styles.modal}`}>
+        {user && (
+          <div className={`${styles.user} user`}>
+            <div className={`${styles.icon} icon`}>
+              <span className={styles.vote}>
+                <Image src="/vote-white.svg" alt="voteWhite" />
+              </span>
+            </div>
+            <div className={`${styles.name} name`}>{user.username}</div>
+          </div>
         )}
+        <form>
+          <div className={styles.header}>
+            <h2 className={styles.title}>コメント</h2>
+            <span className={styles.close_button} onClick={handleModalClose}>
+              <Image src="/close.png" alt="close" />
+            </span>
+          </div>
 
-        {error && <span className={styles.error}>{errorMessage}</span>}
+          {user ? (
+            <textarea
+              ref={$textarea}
+              cols={30}
+              rows={6}
+              className={styles.textarea}
+              onChange={onChange}
+              value={commentValue}
+            ></textarea>
+          ) : (
+            <textarea
+              ref={$textarea}
+              cols={30}
+              rows={10}
+              className={styles.textarea}
+              placeholder="コメントの投稿にはログインが必要です。"
+              readOnly
+              disabled
+            ></textarea>
+          )}
 
-        {user === null ? (
-          <Link href="/auth" className={styles.login}>
-            ログイン
-          </Link>
-        ) : disabled ? (
-          <div className={styles.disabled}>投稿</div>
-        ) : (
-          <button
-            type="submit"
-            className={styles.button}
-            onClick={(e) => createChat(e, $textarea.current?.value)}
-          >
-            投稿
-          </button>
-        )}
+          {error && <span className={styles.error}>{errorMessage}</span>}
 
-        <div className={styles.notice}>
-          <p className={styles.text}>
-            ※皆様の安全と快適なコミュニケーションを保つため、他のユーザーに対する誹謗中傷や不適切な発言は厳禁とします。（当アプリの利用規約に違反する行為は、アカウントの停止措置を含む適切な対応を取らせていただきます。）
-          </p>
-          <p className={styles.text}>
-            ※個人情報の公開や共有は、自身や他人の安全を確保するため、住所、電話番号、メールアドレスなどの個人情報は絶対に公開しないでください。
-          </p>
-        </div>
-      </form>
+          {user === null ? (
+            <Link href="/auth" className={styles.login}>
+              ログイン
+            </Link>
+          ) : disabled ? (
+            <div className={styles.disabled}>投稿</div>
+          ) : (
+            <button
+              type="submit"
+              className={styles.button}
+              onClick={(e) => createChat(e, $textarea.current?.value)}
+            >
+              投稿
+            </button>
+          )}
+
+          <div className={styles.notice}>
+            <p className={styles.text}>
+              ※皆様の安全と快適なコミュニケーションを保つため、他のユーザーに対する誹謗中傷や不適切な発言は厳禁とします。（当アプリの利用規約に違反する行為は、アカウントの停止措置を含む適切な対応を取らせていただきます。）
+            </p>
+            <p className={styles.text}>
+              ※個人情報の公開や共有は、自身や他人の安全を確保するため、住所、電話番号、メールアドレスなどの個人情報は絶対に公開しないでください。
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <style>{`
+      .user {
+        display: ${user ? 'flex' : 'none'};
+      }
+      .icon {
+        background: ${user && user.attributes.profile};
+            
+      `}</style>
     </>
   );
 };

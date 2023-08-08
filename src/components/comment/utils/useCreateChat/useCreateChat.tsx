@@ -4,6 +4,7 @@ import { disabledStore, commentValueStore } from '../../store';
 import { API, graphqlOperation } from 'aws-amplify';
 import { createChat as createChatImported } from '@/graphql/mutations';
 import { userStore } from '@/stores/user';
+import { iconColorStore } from '@/stores';
 
 export const useCreateChat = () => {
   const [errorMessage, setErrorMessage] = useState('投稿できない内容が含まれています。');
@@ -11,6 +12,7 @@ export const useCreateChat = () => {
   const setDisabled = useSetAtom(disabledStore);
   const setCommentValue = useSetAtom(commentValueStore);
   const user = useAtomValue(userStore);
+  const iconColor = useAtomValue(iconColorStore);
 
   const createChat = async (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -34,7 +36,7 @@ export const useCreateChat = () => {
         chatId: Math.floor(Math.random() * 10000),
         userId: user.attributes.sub,
         userName: user.username,
-        iconColor: user.attributes.profile,
+        iconColor: iconColor,
         text: refElement,
         date: getFullDate(),
         likes: 0,

@@ -32,7 +32,7 @@
 }
 
 .header {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   @media screen and (max-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 20px;
@@ -40,9 +40,37 @@
   }
 }
 
+.user {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vote {
+  width: 50%;
+  height: 50%;
+  display: inline-block;
+}
+
+.name {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
 .title {
   color: var(--color-black);
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
 }
 

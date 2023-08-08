@@ -5,34 +5,15 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import { useRouter } from 'next/router';
 import { formFields, dict } from './config';
-import { API, graphqlOperation } from 'aws-amplify';
-import { createUser as createUserImported } from '@/graphql/mutations';
+import { iconColorStore } from '@/stores';
+import { useAtom } from 'jotai';
 
 I18n.putVocabularies(dict);
 I18n.setLanguage('ja');
 
 const AuthRedirect: FunctionComponent<any> = (props) => {
-  const { user } = props;
-
-  const createUser = async () => {
-    const param = {
-      input: {
-        id: user.attributes.sub,
-        userName: user.username,
-        iconColor: user.attributes.profile,
-      },
-    };
-
-    try {
-      const a = await API.graphql(graphqlOperation(createUserImported, param));
-    } catch (err) {
-      console.log('error creating chat:', err);
-    }
-  };
-
   const router = useRouter();
   useEffect(() => {
-    createUser();
     router.push('/thread');
   });
 
@@ -40,7 +21,11 @@ const AuthRedirect: FunctionComponent<any> = (props) => {
 };
 
 export const Auth: FunctionComponent = () => {
-  const [color, setColor] = useState('');
+  const [color1, setColor1] = useState('');
+  const [color2, setColor2] = useState('');
+  const [color3, setColor3] = useState('');
+  const [selectColor, setSelectColor] = useState('');
+  const [iconColor, setIconColor] = useAtom(iconColorStore);
 
   function createGradientCSS() {
     // 0~255のランダムな整数を生成する関数
@@ -64,11 +49,23 @@ export const Auth: FunctionComponent = () => {
     // CSSのlinear-gradient関数の文字列を生成
     const css = `linear-gradient(${deg}deg, ${color1}, ${color2}, ${color3})`;
 
-    setColor(css);
+    return css;
   }
 
+  const handlerSelectColor = (color: string, choice: string) => {
+    setIconColor(color);
+    setSelectColor(choice);
+  };
+
+  const setColors = () => {
+    setColor1(createGradientCSS());
+    setColor2(createGradientCSS());
+    setColor3(createGradientCSS());
+  };
+
   useEffect(() => {
-    createGradientCSS();
+    setColors();
+    setIconColor(color1);
   }, []);
 
   return (
@@ -83,8 +80,27 @@ export const Auth: FunctionComponent = () => {
               FormFields() {
                 return (
                   <>
-                    <div className="icon" />
-                    <input type="hidden" value={color} name="profile" />
+                    <p className="text">
+                      アイコン色:<span>＊登録後の変更はできません。</span>
+                    </p>
+                    <div className="icons">
+                      <div
+                        className={'icon first'}
+                        onClick={() => handlerSelectColor(color1, 'first')}
+                      />
+                      <div
+                        className="icon second"
+                        onClick={() => handlerSelectColor(color2, 'second')}
+                      />
+                      <div
+                        className="icon third"
+                        onClick={() => handlerSelectColor(color3, 'third')}
+                      />
+                    </div>
+                    <button onClick={setColors} className="button">
+                      更新
+                    </button>
+                    <input type="hidden" value={iconColor} name="profile" />
 
                     <Authenticator.SignUp.FormFields />
                   </>
@@ -96,14 +112,46 @@ export const Auth: FunctionComponent = () => {
           {({ user }) => <AuthRedirect user={user} />}
         </Authenticator>
 
-        <style>{`
-        .icon {
-          background: ${color};
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          margin: auto;
-        }
+        <style jsx>{`
+          .icons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+          }
+          .icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+          }
+          .first {
+            background: ${color1};
+            opacity: ${selectColor !== 'first' ? 0.2 : 1};
+          }
+          .second {
+            background: ${color2};
+            opacity: ${selectColor !== 'second' ? 0.2 : 1};
+          }
+          .third {
+            background: ${color3};
+            opacity: ${selectColor !== 'third' ? 0.2 : 1};
+          }
+          .text span {
+            font-size: 12px;
+            padding-left: 4px;
+          }
+          .button {
+            width: 60%;
+            margin: 0 auto 32px;
+            border-radius: 4px;
+            border: none;
+            height: 40px;
+            background: silver;
+            cursor: pointer;
+
+            &:hover {
+              opacity: 0.5;
+            }
+          }
         `}</style>
       </div>
     </>

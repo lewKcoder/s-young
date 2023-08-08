@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { Image } from '@/components/image';
 import { ThreadSkeltons } from '@/components/thread-skeltons';
 import styles from './styles.module.scss';
-import { API, graphqlOperation } from 'aws-amplify';
+import { API, Auth, graphqlOperation } from 'aws-amplify';
 import { listChats } from '@/graphql/queries';
 
 export const ThreadItem: FunctionComponent = () => {
@@ -31,7 +31,11 @@ export const ThreadItem: FunctionComponent = () => {
         <ul className={styles.content}>
           {chats.map(({ id, date, text, userName, likes, iconColor }) => (
             <li key={id} className={styles.list}>
-              <div className={styles.user_icon} style={{ background: `${iconColor}` }} />
+              <div className={styles.user_icon} style={{ background: `${iconColor}` }}>
+                <span className={styles.vote}>
+                  <Image src="/vote-white.svg" alt="voteWhite" />
+                </span>
+              </div>
               <div>
                 <span className={styles.user}>{userName}</span>
                 <span className={styles.date}>{date}</span>
