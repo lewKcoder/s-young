@@ -7,6 +7,10 @@
   left: calc(50% - 240px);
   top: calc(50% - 240px);
 
+  .amplify-tabs {
+    display: none;
+  }
+
   [data-amplify-authenticator] [data-amplify-router] {
     background-color: transparent;
     border: none;

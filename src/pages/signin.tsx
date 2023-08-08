@@ -1,7 +1,7 @@
-import { Auth as AuthLayouts } from '@/layouts/auth';
+import { Signin as SigninLayouts } from '@/layouts/signin';
 import Head from 'next/head';
 
-export default function Thread() {
+export default function Signin() {
   return (
     <>
       <Head>
@@ -11,7 +11,7 @@ export default function Thread() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <AuthLayouts />
+        <SigninLayouts />
       </main>
     </>
   );

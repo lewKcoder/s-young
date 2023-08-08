@@ -21,7 +21,7 @@ const AuthRedirect: FunctionComponent<any> = (props) => {
   return null;
 };
 
-export const Auth: FunctionComponent = () => {
+export const Signin: FunctionComponent = () => {
   const [color1, setColor1] = useState('');
   const [color2, setColor2] = useState('');
   const [color3, setColor3] = useState('');
@@ -76,6 +76,7 @@ export const Auth: FunctionComponent = () => {
       <div id="amplify-c">
         <Authenticator
           formFields={formFields}
+          initialState="signUp"
           components={{
             SignUp: {
               FormFields() {

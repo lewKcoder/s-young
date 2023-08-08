@@ -51,10 +51,10 @@ export const Header: Component = (props) => {
             </Authenticator>
           ) : (
             <>
-              <Link href="auth" className={styles.link}>
+              <Link href="signin" className={styles.link}>
                 ログイン
               </Link>
-              <Link href="auth" className={styles.link}>
+              <Link href="signup" className={styles.link}>
                 新規登録
               </Link>
             </>
