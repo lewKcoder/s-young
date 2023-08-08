@@ -4,8 +4,9 @@
 // amplifyのスタイルファイルはauthコンポーネントのスタイルファイルで読み込み
 #amplify-c {
   position: absolute;
+  padding-bottom: 32px;
   left: calc(50% - 240px);
-  top: calc(50% - 240px);
+  top: calc(50% - 260px);
 
   .amplify-tabs {
     display: none;
@@ -15,6 +16,10 @@
     background-color: transparent;
     border: none;
     box-shadow: none;
+  }
+
+  [data-amplify-authenticator] [data-amplify-form] {
+    padding: 0;
   }
 }
 
