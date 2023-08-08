@@ -51,7 +51,7 @@ export const Header: Component = (props) => {
             </Authenticator>
           ) : (
             <>
-              <Link href="signin" className={styles.link}>
+              <Link href="login" className={styles.link}>
                 ログイン
               </Link>
               <Link href="signup" className={styles.link}>

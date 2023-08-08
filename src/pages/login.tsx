@@ -1,7 +1,7 @@
-import { Signin as SigninLayouts } from '@/layouts/signin';
+import { Login as LoginLayouts } from '@/layouts/login';
 import Head from 'next/head';
 
-export default function Signin() {
+export default function Login() {
   return (
     <>
       <Head>
@@ -11,7 +11,7 @@ export default function Signin() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <SigninLayouts />
+        <LoginLayouts />
       </main>
     </>
   );

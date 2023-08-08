@@ -1,39 +1,27 @@
 export const formFields = {
-  signIn: {
-    username: {
-      placeholder: '名前',
-      isRequired: true,
-      label: 'ユーザーネーム:',
-    },
-    password: {
-      placeholder: 'jefwa45ythgd2',
-      isRequired: true,
-      label: 'パスワード:',
-    },
-  },
   signUp: {
     username: {
-      placeholder: '名前',
+      placeholder: '好きなユーザーネームを入力',
       isRequired: true,
-      label: 'ユーザーネーム:',
+      label: 'ユーザー名',
       order: 1,
     },
     email: {
       placeholder: 'email@example.com',
       isRequired: true,
-      label: 'Eメール:',
+      label: 'Eメール',
       order: 2,
     },
     password: {
-      placeholder: 'jefwa45ythgd2',
+      placeholder: '8文字以上のパスワード',
       isRequired: true,
-      label: 'パスワード:',
+      label: 'パスワード',
       order: 3,
     },
     confirm_password: {
-      placeholder: 'jefwa45ythgd2',
+      placeholder: '8文字以上のパスワード',
       isRequired: true,
-      label: 'パスワード（確認用）:',
+      label: 'パスワード（確認用）',
       order: 4,
     },
   },

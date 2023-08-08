@@ -82,8 +82,9 @@ export const SignUp: FunctionComponent = () => {
               FormFields() {
                 return (
                   <>
+                    <h2 className="title">アカウント登録</h2>
                     <p className="text">
-                      アイコン色を選択:<span>＊登録後の変更はできません。</span>
+                      アイコン色を選択<span>＊登録後の変更はできません。</span>
                     </p>
                     <div className="icons">
                       <div
@@ -127,6 +128,12 @@ export const SignUp: FunctionComponent = () => {
         </Authenticator>
 
         <style jsx>{`
+          .title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 16px;
+          }
           .icons {
             display: flex;
             gap: 16px;
