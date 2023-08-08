@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { Image } from '@/components/image';
 import { ThreadSkeltons } from '@/components/thread-skeltons';
 import styles from './styles.module.scss';
-import { API, Auth, graphqlOperation } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import { listChats } from '@/graphql/queries';
 
 export const ThreadItem: FunctionComponent = () => {
