@@ -36,14 +36,13 @@ export const useCreateChat = () => {
         chatId: Math.floor(Math.random() * 10000),
         userId: user.attributes.sub,
         userName: user.username,
-        iconColor: iconColor,
+        iconColor: iconColor ? iconColor : user.attributes.profile,
         text: refElement,
         date: getFullDate(),
         likes: 0,
         prohibition: 0,
       },
     };
-    console.log(param);
 
     try {
       await API.graphql(graphqlOperation(createChatImported, param));

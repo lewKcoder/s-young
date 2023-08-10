@@ -76,7 +76,7 @@ export const Comment: FunctionComponent = () => {
           {error && <span className={styles.error}>{errorMessage}</span>}
 
           {user === null ? (
-            <Link href="/auth" className={styles.login}>
+            <Link href="/login" className={styles.login}>
               ログイン
             </Link>
           ) : disabled ? (
