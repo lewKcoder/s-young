@@ -28,7 +28,7 @@ export const SignUp: FunctionComponent = () => {
   const [selectColor, setSelectColor] = useState('first');
   const [iconColor, setIconColor] = useAtom(iconColorStore);
 
-  function createGradientCSS() {
+  function createGradientCSS(twoColor?: boolean) {
     // 0~255のランダムな整数を生成する関数
     function randomColor() {
       return Math.floor(Math.random() * 256);
@@ -47,9 +47,12 @@ export const SignUp: FunctionComponent = () => {
     // ランダムな角度
     const deg = Math.floor(Math.random() * 180);
 
-    // CSSのlinear-gradient関数の文字列を生成
-    const css = `linear-gradient(${deg}deg, ${color1}, ${color2}, ${color3})`;
+    if (twoColor) {
+      const css = `linear-gradient(${deg}deg, ${color1}, ${color2})`;
+      return css;
+    }
 
+    const css = `linear-gradient(${deg}deg, ${color1}, ${color2}, ${color3})`;
     return css;
   }
 
@@ -61,7 +64,7 @@ export const SignUp: FunctionComponent = () => {
   const setColors = () => {
     setColor1(createGradientCSS());
     setColor2(createGradientCSS());
-    setColor3(createGradientCSS());
+    setColor3(createGradientCSS(true));
   };
 
   useEffect(() => {
