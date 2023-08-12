@@ -125,8 +125,7 @@
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 16px;
@@ -136,12 +135,17 @@
   display: block;
   width: 20px;
   height: 20px;
+  position: absolute;
+  top: 24px;
+  right: 24px;
 }
 
 .report_input {
+  padding: 8px 16px;
   width: 100%;
   margin-top: 16px;
   resize: none;
+  box-sizing: border-box;
 }
 
 .report_button {
@@ -154,4 +158,32 @@
   background: #f44336;
   font-weight: bold;
   color: var(--color-pure-white);
+  cursor: pointer;
+}
+
+.checkmark {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: auto;
+}
+
+.submited_button {
+  width: 240px;
+  height: 40px;
+  border-radius: 8px;
+  display: block;
+  margin: 16px auto 0;
+  border: none;
+  background: #61c16a;
+  font-weight: bold;
+  color: var(--color-pure-white);
+  cursor: pointer;
+}
+
+.feedback {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 1.4;
 }

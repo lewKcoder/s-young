@@ -10,7 +10,7 @@ import { Chat, Report } from './types';
 
 const Modal: FunctionComponent<
   Report & {
-    cancelProhibition: () => void;
+    closeProhibition: () => void;
     sendProhibition: (
       id: string,
       userName: string,
@@ -20,9 +20,10 @@ const Modal: FunctionComponent<
     ) => void;
   }
 > = (props) => {
-  const { iconColor, userName, date, text, cancelProhibition, sendProhibition } = props;
+  const { id, iconColor, userName, date, text, closeProhibition, sendProhibition } = props;
   const [element, setElement] = useState<HTMLElement | null>(null);
   const [input, setInput] = useState<string>('');
+  const [submited, setSubmited] = useState(false);
 
   useEffect(() => {
     setElement(document.querySelector('body')!!);
@@ -36,45 +37,65 @@ const Modal: FunctionComponent<
     <>
       <div className={styles.overlay} />
       <div className={styles.report}>
-        <div className={styles.header}>
-          <p className={styles.title}>コメントの報告</p>
-          <span className={styles.close_button} onClick={cancelProhibition}>
-            <Image src="/close.png" alt="close" />
-          </span>
-        </div>
-        <div className={styles.list}>
-          <div
-            className={styles.user_icon}
-            style={{
-              background: `${
-                iconColor.length > 0
-                  ? iconColor
-                  : 'linear-gradient(40deg, rgb(23, 51, 2), rgb(95 95 95), rgb(17, 38, 70))'
-              }`,
-            }}
-          >
-            <span className={styles.vote}>
-              <Image src="/vote-white.svg" alt="voteWhite" />
-            </span>
-          </div>
+        {!submited ? (
+          <>
+            <div className={styles.header}>
+              <p className={styles.title}>コメントの報告</p>
+              <span className={styles.close_button} onClick={closeProhibition}>
+                <Image src="/close.png" alt="close" />
+              </span>
+            </div>
+            <div className={styles.list}>
+              <div
+                className={styles.user_icon}
+                style={{
+                  background: `${
+                    iconColor.length > 0
+                      ? iconColor
+                      : 'linear-gradient(40deg, rgb(23, 51, 2), rgb(95 95 95), rgb(17, 38, 70))'
+                  }`,
+                }}
+              >
+                <span className={styles.vote}>
+                  <Image src="/vote-white.svg" alt="voteWhite" />
+                </span>
+              </div>
+              <div>
+                <span className={styles.user}>{userName}</span>
+                <span className={styles.date}>{date}</span>
+                <p className={styles.comment}>{text}</p>
+              </div>
+            </div>
+            <textarea
+              className={styles.report_input}
+              rows={5}
+              placeholder="報告内容を入力してください。"
+              onChange={(e) => setInput(e.target.value)}
+            ></textarea>
+            <button
+              className={styles.report_button}
+              onClick={() => {
+                sendProhibition(id, userName, date, text, input), setSubmited(true);
+              }}
+            >
+              報告する
+            </button>
+          </>
+        ) : (
           <div>
-            <span className={styles.user}>{userName}</span>
-            <span className={styles.date}>{date}</span>
-            <p className={styles.comment}>{text}</p>
+            <p className={styles.header}>報告しました</p>
+            <span className={styles.checkmark}>
+              <Image src="/checkmark.png" alt="voteWhite" />
+            </span>
+            <div className={styles.feedback}>
+              <p>ご協力ありがとうございます。報告内容をもとにサービス向上へ努めてまいります。</p>
+              <p>引き続き掲示板をお楽しみください。</p>
+            </div>
+            <button className={styles.submited_button} onClick={closeProhibition}>
+              閉じる
+            </button>
           </div>
-        </div>
-        <textarea
-          className={styles.report_input}
-          rows={5}
-          placeholder="報告内容を入力してください。"
-          onChange={(e) => setInput(e.target.value)}
-        ></textarea>
-        <button
-          className={styles.report_button}
-          onClick={() => sendProhibition(iconColor, userName, date, text, input)}
-        >
-          報告する
-        </button>
+        )}
       </div>
     </>,
     element
@@ -131,7 +152,7 @@ export const ThreadItem: FunctionComponent = () => {
     setReport(args);
   };
 
-  const cancelProhibition = () => {
+  const closeProhibition = () => {
     setProhibition(false);
     setReport(null);
   };
@@ -165,7 +186,7 @@ export const ThreadItem: FunctionComponent = () => {
                 <div className={styles.action_content}>
                   <span
                     className={styles.icon}
-                    onClick={() => reportProhibition({ iconColor, userName, date, text })}
+                    onClick={() => reportProhibition({ id, iconColor, userName, date, text })}
                   >
                     <Image src="/prohibition.png" alt="Prohibition" />
                   </span>
@@ -182,11 +203,12 @@ export const ThreadItem: FunctionComponent = () => {
           </ul>
           {report && prohibition && (
             <Modal
+              id={report.id}
               iconColor={report.iconColor}
               userName={report.userName}
               date={report.date}
               text={report.text}
-              cancelProhibition={cancelProhibition}
+              closeProhibition={closeProhibition}
               sendProhibition={sendProhibition}
             />
           )}
