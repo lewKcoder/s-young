@@ -12,10 +12,11 @@
 
 .container {
   border-radius: 8px;
-  background: #f8f4ea;
+  background: var(--color-pure-white);
   padding: 24px;
   height: calc(100vh - 170px);
   overflow-y: auto;
+  border: 1px solid #e0e0e0;
 
   @media screen and (max-width: 768px) {
     display: none;
