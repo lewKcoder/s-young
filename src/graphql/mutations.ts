@@ -22,3 +22,15 @@ export const createChat = /* GraphQL */ `
     }
   }
 `;
+
+export const createProhibition = /* GraphQL */ `
+  mutation createProhibition($input: CreateProhibitionInput!) {
+    createProhibition(input: $input) {
+      id
+      userName
+      text
+      date
+      report
+    }
+  }
+`;

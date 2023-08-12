@@ -22,3 +22,11 @@ type Chat @model {
   likes: Int
   prohibition: Boolean
 }
+
+type Prohibition @model {
+  id: ID!
+  userName: String!
+  text: String!
+  date: AWSDateTime!
+  report: String
+}
