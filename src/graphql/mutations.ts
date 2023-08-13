@@ -23,6 +23,14 @@ export const createChat = /* GraphQL */ `
   }
 `;
 
+export const updateChat = /* GraphQL */ `
+  mutation updateChat($input: UpdateChatInput!) {
+    updateChat(input: $input) {
+      likes
+    }
+  }
+`;
+
 export const createProhibition = /* GraphQL */ `
   mutation createProhibition($input: CreateProhibitionInput!) {
     createProhibition(input: $input) {

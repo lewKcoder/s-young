@@ -1,6 +1,6 @@
 export type Chat = {
   id: string;
-  userId: string;
+  userId?: string;
   chatId: string;
   userName: string;
   iconColor: string;

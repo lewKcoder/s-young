@@ -3,10 +3,14 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { Image } from '@/components/image';
 import { ThreadSkeltons } from '@/components/thread-skeltons';
 import styles from './styles.module.scss';
+import { GraphQLSubscription } from '@aws-amplify/api';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChats } from '@/graphql/queries';
-import { createProhibition } from '@/graphql/mutations';
+import { createProhibition, updateChat } from '@/graphql/mutations';
+import { onCreateChat } from '@/graphql/subscriptions';
 import { Chat, Report } from './types';
+import { OnCreateChatSubscription } from '@/API';
+import { Item } from './component/item/item';
 
 const Modal: FunctionComponent<
   Report & {
@@ -102,13 +106,29 @@ const Modal: FunctionComponent<
   );
 };
 
-export const ThreadItem: FunctionComponent = () => {
+export const ThreadItems: FunctionComponent = () => {
   const [chats, setChat] = useState<Chat | []>([]);
   const [prohibition, setProhibition] = useState(false);
   const [report, setReport] = useState<Report | null>(null);
 
   useEffect(() => {
     getChats();
+
+    const createChat = API.graphql<GraphQLSubscription<OnCreateChatSubscription>>(
+      graphqlOperation(onCreateChat)
+    );
+
+    const createChatSubscription = createChat.subscribe({
+      next: ({ value }) => {
+        const newChat: any = value.data?.onCreateChat;
+        setChat((prevChat) => [...prevChat, newChat]);
+      },
+      error: (error) => console.warn(error),
+    });
+
+    return () => {
+      createChatSubscription.unsubscribe();
+    };
   }, []);
 
   const getChats = async () => {
@@ -157,48 +177,37 @@ export const ThreadItem: FunctionComponent = () => {
     setReport(null);
   };
 
+  const likeChat = async (id: string, likes: number) => {
+    const param = {
+      input: {
+        id: id,
+        likes: likes + 1,
+      },
+    };
+    try {
+      await API.graphql(graphqlOperation(updateChat, param));
+    } catch (err) {
+      console.log('error updateChat:', err);
+    }
+  };
+
   return (
     <div className={`${styles.container} ${chats.length === 0 && styles.has_loading}`}>
       {chats.length > 0 ? (
         <>
           <ul className={styles.content}>
             {chats.map(({ id, iconColor, userName, date, text, likes }) => (
-              <li key={id} className={styles.list}>
-                <div
-                  className={styles.user_icon}
-                  style={{
-                    background: `${
-                      iconColor.length > 0
-                        ? iconColor
-                        : 'linear-gradient(40deg, rgb(23, 51, 2), rgb(95 95 95), rgb(17, 38, 70))'
-                    }`,
-                  }}
-                >
-                  <span className={styles.vote}>
-                    <Image src="/vote-white.svg" alt="voteWhite" />
-                  </span>
-                </div>
-                <div>
-                  <span className={styles.user}>{userName}</span>
-                  <span className={styles.date}>{date}</span>
-                  <p className={styles.comment}>{text}</p>
-                </div>
-                <div className={styles.action_content}>
-                  <span
-                    className={styles.icon}
-                    onClick={() => reportProhibition({ id, iconColor, userName, date, text })}
-                  >
-                    <Image src="/prohibition.png" alt="Prohibition" />
-                  </span>
-
-                  <div className={styles.like}>
-                    {likes && <span>{likes}</span>}
-                    <span className={styles.icon}>
-                      <Image src="/like.png" alt="Like" />
-                    </span>
-                  </div>
-                </div>
-              </li>
+              <Item
+                key={id}
+                id={id}
+                iconColor={iconColor}
+                userName={userName}
+                date={date}
+                text={text}
+                likes={likes}
+                reportProhibition={reportProhibition}
+                likeChat={likeChat}
+              />
             ))}
           </ul>
           {report && prohibition && (
