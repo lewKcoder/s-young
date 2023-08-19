@@ -5,10 +5,26 @@ import { userStore } from '@/stores/user';
 import { useAtom } from 'jotai';
 import styles from './styles.module.scss';
 import Link from 'next/link';
+import { listUsers } from '@/graphql/queries';
+import { API, graphqlOperation } from 'aws-amplify';
+import { useEffect } from 'react';
 
 export const Header: Component = (props) => {
   const { hasBlur } = props;
   const [user, setUser] = useAtom(userStore);
+
+  const getUsers = async () => {
+    try {
+      const usersData = await API.graphql(graphqlOperation(listUsers));
+      console.log(usersData);
+    } catch (err) {
+      console.log('error fetching chat:', err);
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>
@@ -28,7 +44,7 @@ export const Header: Component = (props) => {
 
         <Link href="/thread" className={styles.site_title}>
           <span className={styles.image}>
-            <Image src="/site-icon.svg" alt="" />
+            <Image src="/site-icon-black.svg" alt="" />
           </span>
           <h1 className={styles.title}>SEN</h1>
         </Link>

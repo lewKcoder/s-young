@@ -21,6 +21,14 @@
   [data-amplify-authenticator] [data-amplify-form] {
     padding: 0;
   }
+
+  .amplify-button--primary {
+    background-color: #3f8ae8;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 }
 
 /* 

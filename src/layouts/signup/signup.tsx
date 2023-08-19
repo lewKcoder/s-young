@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { formFields, dict } from './config';
 import { iconColorStore } from '@/stores';
 import { useAtom } from 'jotai';
+import Link from 'next/link';
 
 I18n.putVocabularies(dict);
 I18n.setLanguage('ja');
@@ -121,6 +122,10 @@ export const SignUp: FunctionComponent = () => {
                     <input type="hidden" value={iconColor} name="profile" />
 
                     <Authenticator.SignUp.FormFields />
+
+                    <div className="link">
+                      <Link href="/login">アカウントをお持ちの方はこちらから</Link>
+                    </div>
                   </>
                 );
               },
@@ -150,6 +155,10 @@ export const SignUp: FunctionComponent = () => {
             align-items: center;
             justify-content: center;
           }
+          .link {
+            text-align: center;
+            font-size: 14px;
+          }
           .vote {
             width: 50%;
             height: 50%;
@@ -176,12 +185,17 @@ export const SignUp: FunctionComponent = () => {
             border-radius: 4px;
             border: none;
             height: 40px;
-            background: silver;
+            font-weight: bold;
+            color: #fff;
+            background-color: #2c64aa;
             cursor: pointer;
 
             &:hover {
-              opacity: 0.5;
+              opacity: 0.6;
             }
+          }
+          :global(a) {
+            text-decoration: none;
           }
         `}</style>
       </div>

@@ -17,6 +17,19 @@ export const getUser = /* GraphQL */ `
   }
 `;
 
+export const listUsers = /* GraphQL */ `
+  query listUsers {
+    listUsers {
+      items {
+        id
+        userName
+        iconColor
+      }
+      nextToken
+    }
+  }
+`;
+
 export const getChat = /* GraphQL */ `
   query getChat($id: ID!) {
     getChat(id: $id) {

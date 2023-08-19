@@ -38,7 +38,7 @@ export const Comment: FunctionComponent = () => {
           <div className={`${styles.user} user`}>
             <div className={`${styles.icon} icon`}>
               <span className={styles.vote}>
-                <Image src="/vote-white.svg" alt="voteWhite" />
+                <Image src="/site-icon-white.svg" alt="voteWhite" />
               </span>
             </div>
             <div className={`${styles.name} name`}>{user.username}</div>
