@@ -16,7 +16,6 @@ export const Header: Component = (props) => {
   const getUsers = async () => {
     try {
       const usersData = await API.graphql(graphqlOperation(listUsers));
-      console.log(usersData);
     } catch (err) {
       console.log('error fetching chat:', err);
     }

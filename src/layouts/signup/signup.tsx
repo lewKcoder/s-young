@@ -3,12 +3,13 @@ import { Header } from '@/components/header';
 import { Image } from '@/components/image';
 import { I18n } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
 import { useRouter } from 'next/router';
 import { formFields, dict } from './config';
 import { iconColorStore } from '@/stores';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
+import styles from './styles.module.scss';
+import '@aws-amplify/ui-react/styles.css';
 
 I18n.putVocabularies(dict);
 I18n.setLanguage('ja');
@@ -30,22 +31,18 @@ export const SignUp: FunctionComponent = () => {
   const [iconColor, setIconColor] = useAtom(iconColorStore);
 
   function createGradientCSS(twoColor?: boolean) {
-    // 0~255のランダムな整数を生成する関数
     function randomColor() {
       return Math.floor(Math.random() * 256);
     }
 
-    // rgb色の文字列を生成する関数
     function rgbString() {
       return `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
     }
 
-    // 3色のrgb色を生成
     const color1 = rgbString();
     const color2 = rgbString();
     const color3 = rgbString();
 
-    // ランダムな角度
     const deg = Math.floor(Math.random() * 180);
 
     if (twoColor) {
@@ -86,44 +83,44 @@ export const SignUp: FunctionComponent = () => {
               FormFields() {
                 return (
                   <>
-                    <h2 className="title">アカウント登録</h2>
-                    <p className="text">
+                    <h2 className={styles.title}>アカウント登録</h2>
+                    <p className={styles.text}>
                       アイコン色を選択<span>＊登録後の変更はできません。</span>
                     </p>
-                    <div className="icons">
+                    <div className={styles.icons}>
                       <div
-                        className={'icon first'}
+                        className={`${styles.icon} first`}
                         onClick={() => handlerSelectColor(color1, 'first')}
                       >
-                        <span className="vote">
+                        <span className={styles.vote}>
                           <Image src="/vote-white.svg" alt="voteWhite" />
                         </span>
                       </div>
                       <div
-                        className="icon second"
+                        className={`${styles.icon} second`}
                         onClick={() => handlerSelectColor(color2, 'second')}
                       >
-                        <span className="vote">
+                        <span className={styles.vote}>
                           <Image src="/vote-white.svg" alt="voteWhite" />
                         </span>
                       </div>
                       <div
-                        className="icon third"
+                        className={`${styles.icon} third`}
                         onClick={() => handlerSelectColor(color3, 'third')}
                       >
-                        <span className="vote">
+                        <span className={styles.vote}>
                           <Image src="/vote-white.svg" alt="voteWhite" />
                         </span>
                       </div>
                     </div>
-                    <button onClick={setColors} className="button">
+                    <button onClick={setColors} className={styles.button}>
                       更新
                     </button>
                     <input type="hidden" value={iconColor} name="profile" />
 
                     <Authenticator.SignUp.FormFields />
 
-                    <div className="link">
+                    <div className={styles.link}>
                       <Link href="/login">アカウントをお持ちの方はこちらから</Link>
                     </div>
                   </>
@@ -136,33 +133,6 @@ export const SignUp: FunctionComponent = () => {
         </Authenticator>
 
         <style jsx>{`
-          .title {
-            text-align: center;
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 16px;
-          }
-          .icons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-          }
-          .icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .link {
-            text-align: center;
-            font-size: 14px;
-          }
-          .vote {
-            width: 50%;
-            height: 50%;
-          }
           .first {
             background: ${color1};
             opacity: ${selectColor !== 'first' ? 0.2 : 1};
@@ -174,28 +144,6 @@ export const SignUp: FunctionComponent = () => {
           .third {
             background: ${color3};
             opacity: ${selectColor !== 'third' ? 0.2 : 1};
-          }
-          .text span {
-            font-size: 12px;
-            padding-left: 4px;
-          }
-          .button {
-            width: 60%;
-            margin: 0 auto 32px;
-            border-radius: 4px;
-            border: none;
-            height: 40px;
-            font-weight: bold;
-            color: #fff;
-            background-color: #2c64aa;
-            cursor: pointer;
-
-            &:hover {
-              opacity: 0.6;
-            }
-          }
-          :global(a) {
-            text-decoration: none;
           }
         `}</style>
       </div>

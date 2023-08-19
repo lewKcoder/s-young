@@ -6,16 +6,16 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export const Vote: FunctionComponent = () => {
-  const timeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#RedCard',
-      start: '+120px center',
-      end: '+1000px top',
-      scrub: true,
-    },
-  });
-
   useEffect(() => {
+    const timeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#RedCard',
+        start: '+120px center',
+        end: '+1000px top',
+        scrub: true,
+      },
+    });
+
     timeline
       .to('#RedCard', {
         opacity: 0.5,
