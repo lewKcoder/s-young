@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { formFields, dict } from './config';
 import { iconColorStore } from '@/stores';
 import { useAtom } from 'jotai';
+import { createGradientCSS } from './utils';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 import '@aws-amplify/ui-react/styles.css';
@@ -14,7 +15,7 @@ import '@aws-amplify/ui-react/styles.css';
 I18n.putVocabularies(dict);
 I18n.setLanguage('ja');
 
-const AuthRedirect: FunctionComponent<any> = (props) => {
+const AuthRedirect: FunctionComponent = () => {
   const router = useRouter();
   useEffect(() => {
     router.push('/thread');
@@ -24,50 +25,31 @@ const AuthRedirect: FunctionComponent<any> = (props) => {
 };
 
 export const SignUp: FunctionComponent = () => {
-  const [color1, setColor1] = useState('');
-  const [color2, setColor2] = useState('');
-  const [color3, setColor3] = useState('');
-  const [selectColor, setSelectColor] = useState('first');
   const [iconColor, setIconColor] = useAtom(iconColorStore);
+  const [colorData, setColorData] = useState<{ [key: string]: string }>({
+    selectColor: 'color1',
+    color1: '',
+    color2: '',
+    color3: '',
+  });
 
-  function createGradientCSS(twoColor?: boolean) {
-    function randomColor() {
-      return Math.floor(Math.random() * 256);
-    }
-
-    function rgbString() {
-      return `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
-    }
-
-    const color1 = rgbString();
-    const color2 = rgbString();
-    const color3 = rgbString();
-
-    const deg = Math.floor(Math.random() * 180);
-
-    if (twoColor) {
-      const css = `linear-gradient(${deg}deg, ${color1}, ${color2})`;
-      return css;
-    }
-
-    const css = `linear-gradient(${deg}deg, ${color1}, ${color2}, ${color3})`;
-    return css;
-  }
-
-  const handlerSelectColor = (color: string, choice: string) => {
+  const selectColor = (color: string, choice: string) => {
     setIconColor(color);
-    setSelectColor(choice);
+    setColorData((prevColor) => ({ ...prevColor, selectColor: choice }));
   };
 
   const setColors = () => {
-    setColor1(createGradientCSS());
-    setColor2(createGradientCSS());
-    setColor3(createGradientCSS(true));
+    setColorData((prevColor) => ({
+      ...prevColor,
+      color1: createGradientCSS(),
+      color2: createGradientCSS(),
+      color3: createGradientCSS(true),
+    }));
   };
 
   useEffect(() => {
     setColors();
-    setIconColor(color1);
+    setIconColor(colorData.color1);
   }, []);
 
   return (
@@ -88,30 +70,17 @@ export const SignUp: FunctionComponent = () => {
                       アイコン色を選択<span>＊登録後の変更はできません。</span>
                     </p>
                     <div className={styles.icons}>
-                      <div
-                        className={`${styles.icon} first`}
-                        onClick={() => handlerSelectColor(color1, 'first')}
-                      >
-                        <span className={styles.vote}>
-                          <Image src="/vote-white.svg" alt="voteWhite" />
-                        </span>
-                      </div>
-                      <div
-                        className={`${styles.icon} second`}
-                        onClick={() => handlerSelectColor(color2, 'second')}
-                      >
-                        <span className={styles.vote}>
-                          <Image src="/vote-white.svg" alt="voteWhite" />
-                        </span>
-                      </div>
-                      <div
-                        className={`${styles.icon} third`}
-                        onClick={() => handlerSelectColor(color3, 'third')}
-                      >
-                        <span className={styles.vote}>
-                          <Image src="/vote-white.svg" alt="voteWhite" />
-                        </span>
-                      </div>
+                      {['color1', 'color2', 'color3'].map((color) => (
+                        <div
+                          key={color}
+                          className={`${styles.icon} ${color}`}
+                          onClick={() => selectColor(colorData[color], color)}
+                        >
+                          <span className={styles.vote}>
+                            <Image src="/vote-white.svg" alt="voteWhite" />
+                          </span>
+                        </div>
+                      ))}
                     </div>
                     <button onClick={setColors} className={styles.button}>
                       更新
@@ -129,21 +98,21 @@ export const SignUp: FunctionComponent = () => {
             },
           }}
         >
-          {({ user }) => <AuthRedirect user={user} />}
+          {() => <AuthRedirect />}
         </Authenticator>
 
         <style jsx>{`
-          .first {
-            background: ${color1};
-            opacity: ${selectColor !== 'first' ? 0.2 : 1};
+          .color1 {
+            background: ${colorData.color1};
+            opacity: ${colorData.selectColor !== 'color1' ? 0.2 : 1};
           }
-          .second {
-            background: ${color2};
-            opacity: ${selectColor !== 'second' ? 0.2 : 1};
+          .color2 {
+            background: ${colorData.color2};
+            opacity: ${colorData.selectColor !== 'color2' ? 0.2 : 1};
           }
-          .third {
-            background: ${color3};
-            opacity: ${selectColor !== 'third' ? 0.2 : 1};
+          .color3 {
+            background: ${colorData.color3};
+            opacity: ${colorData.selectColor !== 'color3' ? 0.2 : 1};
           }
         `}</style>
       </div>

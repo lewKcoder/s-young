@@ -18,6 +18,7 @@ export const dict = {
     'Sign in': 'ログイン',
     'Sign In': 'ログイン',
     'Signing In': 'ログイン中',
+    'Signing in': 'ログイン中',
     'Creating account': 'アカウント作成中',
     'Creating Account': 'アカウント作成中',
     'Sign Out': 'サインアウト',

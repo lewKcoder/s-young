@@ -10,7 +10,7 @@ import '@aws-amplify/ui-react/styles.css';
 I18n.putVocabularies(dict);
 I18n.setLanguage('ja');
 
-const AuthRedirect: FunctionComponent<any> = (props) => {
+const AuthRedirect: FunctionComponent = () => {
   const router = useRouter();
   useEffect(() => {
     router.push('/thread');
@@ -26,7 +26,7 @@ export const Login: FunctionComponent = () => {
 
       <div id="amplify-c">
         <h2 className={styles.title}>ログイン</h2>
-        <Authenticator>{({ user }) => <AuthRedirect user={user} />}</Authenticator>
+        <Authenticator>{() => <AuthRedirect />}</Authenticator>
       </div>
     </>
   );
