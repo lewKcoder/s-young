@@ -54,7 +54,7 @@ export const SignUp: FunctionComponent = () => {
 
   return (
     <>
-      <Header />
+      <Header hasBlur />
 
       <div id="amplify-c">
         <Authenticator

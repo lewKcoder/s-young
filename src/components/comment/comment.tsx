@@ -16,7 +16,6 @@ export const Comment: FunctionComponent = () => {
   const error = useAtomValue(errorStore);
   const user = useAtomValue(userStore);
   const $textarea = useRef<HTMLTextAreaElement>(null);
-
   const onChange = useOnChange($textarea);
   const createChat = useCreateChat();
 
@@ -24,6 +23,9 @@ export const Comment: FunctionComponent = () => {
     <>
       <div className={styles.chat_button} onClick={() => setModal(true)} />
       <div className={`${styles.container} ${modal && styles.modal}`}>
+        <span className={styles.close_button} onClick={() => setModal(false)}>
+          <Image src="/close.png" alt="close" />
+        </span>
         {user && (
           <div className={`${styles.user} user`}>
             <div className={`${styles.icon} icon`}>
@@ -35,12 +37,7 @@ export const Comment: FunctionComponent = () => {
           </div>
         )}
         <form>
-          <div className={styles.header}>
-            <h2 className={styles.title}>コメント</h2>
-            <span className={styles.close_button} onClick={() => setModal(false)}>
-              <Image src="/close.png" alt="close" />
-            </span>
-          </div>
+          <h2 className={styles.title}>コメント</h2>
 
           {user ? (
             <textarea
@@ -93,12 +90,11 @@ export const Comment: FunctionComponent = () => {
       </div>
 
       <style>{`
-      .user {
-        display: ${user ? 'flex' : 'none'};
-      }
-      .icon {
-        background: ${user && user.attributes.profile};
-            
+        .user {
+          display: ${user ? 'flex' : 'none'};
+        }
+        .icon {
+          background: ${user && user.attributes.profile};
       `}</style>
     </>
   );

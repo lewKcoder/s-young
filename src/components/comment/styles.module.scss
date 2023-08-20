@@ -34,15 +34,6 @@
   height: auto;
 }
 
-.header {
-  margin-bottom: 8px;
-  @media screen and (max-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr 20px;
-    align-items: center;
-  }
-}
-
 .user {
   flex-direction: column;
   gap: 12px;
@@ -75,6 +66,7 @@
   color: var(--color-black);
   font-size: 14px;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
 .textarea {
@@ -140,6 +132,9 @@
 
   @media screen and (max-width: 768px) {
     display: block;
+    position: absolute;
+    top: 16px;
+    right: 24px;
   }
 }
 

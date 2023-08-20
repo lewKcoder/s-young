@@ -14,14 +14,7 @@ export const Header: Component = (props) => {
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>
       <nav className={styles.content}>
         <div className={`${styles.links} ${styles.left_items}`}>
-          <Link
-            href="/"
-            className={styles.link}
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href = '/';
-            }}
-          >
+          <Link href="/" className={styles.link}>
             ホーム
           </Link>
         </div>

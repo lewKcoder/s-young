@@ -22,7 +22,7 @@ const AuthRedirect: FunctionComponent = () => {
 export const Login: FunctionComponent = () => {
   return (
     <>
-      <Header />
+      <Header hasBlur />
 
       <div id="amplify-c">
         <h2 className={styles.title}>ログイン</h2>

@@ -141,6 +141,11 @@ table {
   left: calc(50% - 240px);
   top: calc(50% - 260px);
 
+  @media screen {
+    position: initial;
+    padding: 100px 24px;
+  }
+
   .amplify-tabs {
     display: none;
   }
