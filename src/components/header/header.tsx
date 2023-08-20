@@ -5,25 +5,10 @@ import { userStore } from '@/stores/user';
 import { useAtom } from 'jotai';
 import styles from './styles.module.scss';
 import Link from 'next/link';
-import { listUsers } from '@/graphql/queries';
-import { API, graphqlOperation } from 'aws-amplify';
-import { useEffect } from 'react';
 
 export const Header: Component = (props) => {
   const { hasBlur } = props;
   const [user, setUser] = useAtom(userStore);
-
-  const getUsers = async () => {
-    try {
-      const usersData = await API.graphql(graphqlOperation(listUsers));
-    } catch (err) {
-      console.log('error fetching chat:', err);
-    }
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
 
   return (
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>

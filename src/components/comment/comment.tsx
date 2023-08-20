@@ -20,18 +20,9 @@ export const Comment: FunctionComponent = () => {
   const onChange = useOnChange($textarea);
   const createChat = useCreateChat();
 
-  // TODO: utilsに切り分ける
-  const handleModalOpen = () => {
-    setModal(true);
-  };
-
-  const handleModalClose = () => {
-    setModal(false);
-  };
-
   return (
     <>
-      <div className={styles.chat_button} onClick={handleModalOpen} />
+      <div className={styles.chat_button} onClick={() => setModal(true)} />
       <div className={`${styles.container} ${modal && styles.modal}`}>
         {user && (
           <div className={`${styles.user} user`}>
@@ -46,7 +37,7 @@ export const Comment: FunctionComponent = () => {
         <form>
           <div className={styles.header}>
             <h2 className={styles.title}>コメント</h2>
-            <span className={styles.close_button} onClick={handleModalClose}>
+            <span className={styles.close_button} onClick={() => setModal(false)}>
               <Image src="/close.png" alt="close" />
             </span>
           </div>

@@ -5,12 +5,11 @@ import { ThreadSkeltons } from '@/components/thread-skeltons';
 import styles from './styles.module.scss';
 import { GraphQLSubscription } from '@aws-amplify/api';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listChats } from '@/graphql/queries';
-import { createProhibition, updateChat } from '@/graphql/mutations';
 import { onCreateChat } from '@/graphql/subscriptions';
 import { Chat, Report } from './types';
 import { OnCreateChatSubscription } from '@/API';
 import { Item } from './component/item/item';
+import { LikeChatAPI, GetChatsAPI, SendProhibitionAPI } from '@/data';
 
 const Modal: FunctionComponent<
   Report & {
@@ -111,8 +110,17 @@ export const ThreadItems: FunctionComponent = () => {
   const [prohibition, setProhibition] = useState(false);
   const [report, setReport] = useState<Report | null>(null);
 
+  const likeChat = LikeChatAPI();
+  const getChats = GetChatsAPI();
+  const sendProhibition = SendProhibitionAPI();
+
   useEffect(() => {
-    getChats();
+    const fetchChats = async () => {
+      const chats = await getChats();
+      setChat(chats);
+    };
+
+    fetchChats();
 
     const createChat = API.graphql<GraphQLSubscription<OnCreateChatSubscription>>(
       graphqlOperation(onCreateChat)
@@ -131,42 +139,6 @@ export const ThreadItems: FunctionComponent = () => {
     };
   }, []);
 
-  const getChats = async () => {
-    try {
-      const chatData = await API.graphql(graphqlOperation(listChats));
-
-      if ('data' in chatData) {
-        setChat(chatData.data.listChats.items);
-      }
-    } catch (err) {
-      console.log('error fetching chat:', err);
-    }
-  };
-
-  const sendProhibition = async (
-    id: string,
-    userName: string,
-    date: string,
-    text: string,
-    report: string
-  ) => {
-    const param = {
-      input: {
-        id: id,
-        userName: userName,
-        text: text,
-        date: new Date(date).toISOString(),
-        report: report,
-      },
-    };
-
-    try {
-      await API.graphql(graphqlOperation(createProhibition, param));
-    } catch (err) {
-      console.log('error createProhibition:', err);
-    }
-  };
-
   const reportProhibition = (args: Report) => {
     setProhibition(true);
     setReport(args);
@@ -175,20 +147,6 @@ export const ThreadItems: FunctionComponent = () => {
   const closeProhibition = () => {
     setProhibition(false);
     setReport(null);
-  };
-
-  const likeChat = async (id: string, likes: number) => {
-    const param = {
-      input: {
-        id: id,
-        likes: likes + 1,
-      },
-    };
-    try {
-      await API.graphql(graphqlOperation(updateChat, param));
-    } catch (err) {
-      console.log('error updateChat:', err);
-    }
   };
 
   return (
