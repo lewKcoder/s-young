@@ -1,5 +1,5 @@
 import { Image } from '@/components/image';
-import styles from './styles.module.scss';
+import styles from '../../styles.module.scss';
 import { Component } from './types';
 import { useState } from 'react';
 
