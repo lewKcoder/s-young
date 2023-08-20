@@ -10,7 +10,6 @@ import Link from 'next/link';
 
 export const Comment: FunctionComponent = () => {
   const [modal, setModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('投稿できない内容が含まれています。');
 
   const disabled = useAtomValue(disabledStore);
   const commentValue = useAtomValue(commentValueStore);
@@ -73,7 +72,7 @@ export const Comment: FunctionComponent = () => {
             ></textarea>
           )}
 
-          {error && <span className={styles.error}>{errorMessage}</span>}
+          {error && <span className={styles.error}>投稿できない内容が含まれています。</span>}
 
           {user === null ? (
             <Link href="/login" className={styles.login}>
