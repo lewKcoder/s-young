@@ -7,43 +7,53 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const Vote: FunctionComponent = () => {
   useEffect(() => {
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#RedCard',
-        start: '+120px center',
-        end: '+1000px top',
-        scrub: true,
-      },
-    });
+    const timeline = gsap.timeline();
 
     timeline
       .to('#RedCard', {
         opacity: 0.5,
-        top: 'calc(50% - -400px)',
+        top: '1200px',
         borderColor: '#ff5454',
+        scrollTrigger: {
+          trigger: '#RedCard',
+          start: '+120px 400px',
+          end: '+1000px top',
+          scrub: true,
+        },
       })
       .to('#RedCard', {
         borderRadius: '50%',
         scale: 0,
         width: 10,
         height: 10,
-        top: 'calc(50% - -420px)',
-        left: 'calc(50% - 37px)',
+        borderWidth: 0,
+        left: 'calc(50% - 16px)',
+        scrollTrigger: {
+          trigger: '#RedCard',
+          start: '+1100px 400px',
+          end: '+1000px +200px',
+          scrub: true,
+        },
       })
       .to('#RedCard', {
-        scale: 50,
-        opacity: 0,
-        display: 'none',
+        scale: 150,
+        autoAlpha: 0,
+        scrollTrigger: {
+          trigger: '#RedCard',
+          start: '+1250px 400px',
+          end: '+1500px top',
+          scrub: true,
+        },
       });
 
     gsap.to('#WhiteCard', {
-      top: 'calc(50% - -863px)',
+      top: '1200px',
       ease: 'none',
       scrollTrigger: {
         trigger: '#WhiteCard',
         scrub: true,
-        start: '+115px center',
-        end: '+40px top',
+        start: '+110px center',
+        end: '+400px top',
       },
     });
   }, []);

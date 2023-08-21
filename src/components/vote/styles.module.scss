@@ -1,5 +1,5 @@
 .container {
-  margin: calc(10.5vh + 120px) auto 10.5vh;
+  margin: 200px auto 10.5vh;
   height: 168px;
   width: 168px;
   position: relative;
@@ -14,9 +14,9 @@
   background-color: #ff5454;
   border-radius: 8px;
   position: absolute;
-  top: calc(50% - -23px);
+  top: 110px;
   left: calc(50% - 59px);
-  width: 67px;
+  width: 63px;
   height: 97px;
   transform: rotate(20deg);
   border: 12px var(--color-black) solid;
