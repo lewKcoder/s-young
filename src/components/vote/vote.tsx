@@ -31,7 +31,7 @@ export const Vote: FunctionComponent = () => {
         scrollTrigger: {
           trigger: '#RedCard',
           start: '+1100px 400px',
-          end: '+1000px +200px',
+          end: '+1200px +200px',
           scrub: true,
         },
       })
@@ -40,7 +40,7 @@ export const Vote: FunctionComponent = () => {
         autoAlpha: 0,
         scrollTrigger: {
           trigger: '#RedCard',
-          start: '+1250px 400px',
+          start: '+1400px 400px',
           end: '+1500px top',
           scrub: true,
         },

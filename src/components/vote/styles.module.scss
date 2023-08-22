@@ -4,6 +4,7 @@
   width: 168px;
   position: relative;
   z-index: -1;
+  line-height: 1;
 }
 
 .vote {
@@ -20,6 +21,7 @@
   height: 97px;
   transform: rotate(20deg);
   border: 12px var(--color-black) solid;
+  box-sizing: content-box;
 }
 
 .white_card {
