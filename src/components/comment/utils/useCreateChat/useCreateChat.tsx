@@ -20,16 +20,28 @@ export const useCreateChat = () => {
   ) => {
     e.preventDefault();
 
-    const getFullDate = () => {
-      const date = new Date();
-      const year = date.getFullYear();
-      const month = date.getMonth() + 1;
-      const day = date.getDate() + 1;
-      const hours = String(date.getHours()).padStart(2, '0');
-      const minutes = String(date.getMinutes()).padStart(2, '0');
+    function getFullDate(date: Date) {
+      const components = [
+        date.getFullYear(),
+        date.getMonth() + 1,
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+      ];
 
-      return `${year}/${month}/${day} ${hours}:${minutes}`;
-    };
+      return (
+        components
+          .slice(0, 3)
+          .map((n) => n.toString().padStart(2, '0'))
+          .join('-') +
+        ' ' +
+        components
+          .slice(3)
+          .map((n) => n.toString().padStart(2, '0'))
+          .join(':')
+      );
+    }
 
     const param = {
       input: {
@@ -38,7 +50,7 @@ export const useCreateChat = () => {
         userName: user.username,
         iconColor: iconColor ? iconColor : user.attributes.profile,
         text: refElement,
-        date: getFullDate(),
+        date: getFullDate(new Date()),
         likes: 0,
         prohibition: 0,
       },
