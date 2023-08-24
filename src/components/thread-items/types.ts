@@ -1,4 +1,6 @@
-export type Chat = {
+import { FunctionComponent } from 'react';
+
+export type Chats = {
   id: string;
   userId?: string;
   chatId: string;
@@ -17,3 +19,5 @@ export type Report = {
   date: string;
   text: string;
 };
+
+export type Component = FunctionComponent;

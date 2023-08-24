@@ -1,47 +1,27 @@
-import { FunctionComponent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ThreadSkeltons } from '@/components/thread-skeltons';
 import styles from './styles.module.scss';
-import { GraphQLSubscription } from '@aws-amplify/api';
-import { API, graphqlOperation } from 'aws-amplify';
-import { onCreateChat } from '@/graphql/subscriptions';
-import { Chat, Report } from './types';
-import { OnCreateChatSubscription } from '@/API';
+import { Chats, Report, Component } from './types';
 import { Item, Modal } from './component';
-import { LikeChatAPI, GetChatsAPI, SendProhibitionAPI } from '@/data';
+import { LikeChatAPI, SendProhibitionAPI } from '@/data';
+import { useChatSubscription, useFetchChats } from './utils';
 
-export const ThreadItems: FunctionComponent = () => {
-  const [chats, setChat] = useState<Chat | []>([]);
+export const ThreadItems: Component = () => {
+  const [chats, setChats] = useState<Chats | []>([]);
   const [prohibition, setProhibition] = useState(false);
   const [report, setReport] = useState<Report | null>(null);
 
+  const fetchedChats = useFetchChats();
   const likeChat = LikeChatAPI();
-  const getChats = GetChatsAPI();
   const sendProhibition = SendProhibitionAPI();
 
   useEffect(() => {
-    const fetchChats = async () => {
-      const chats = await getChats();
-      setChat(chats);
-    };
+    setChats(fetchedChats);
+  }, [fetchedChats]);
 
-    fetchChats();
-
-    const createChat = API.graphql<GraphQLSubscription<OnCreateChatSubscription>>(
-      graphqlOperation(onCreateChat)
-    );
-
-    const createChatSubscription = createChat.subscribe({
-      next: ({ value }) => {
-        const newChat: any = value.data?.onCreateChat;
-        setChat((prevChat) => [...prevChat, newChat]);
-      },
-      error: (error) => console.warn(error),
-    });
-
-    return () => {
-      createChatSubscription.unsubscribe();
-    };
-  }, []);
+  useChatSubscription((newChat) => {
+    setChats((prevChats) => [...prevChats, newChat]);
+  });
 
   const reportProhibition = (args: Report) => {
     setProhibition(true);
@@ -58,15 +38,10 @@ export const ThreadItems: FunctionComponent = () => {
       {chats.length > 0 ? (
         <>
           <ul className={styles.content}>
-            {chats.map(({ id, iconColor, userName, date, text, likes }) => (
+            {chats.map((chat) => (
               <Item
-                key={id}
-                id={id}
-                iconColor={iconColor}
-                userName={userName}
-                date={date}
-                text={text}
-                likes={likes}
+                key={chat.id}
+                {...chat}
                 reportProhibition={reportProhibition}
                 likeChat={likeChat}
               />
@@ -74,11 +49,7 @@ export const ThreadItems: FunctionComponent = () => {
           </ul>
           {report && prohibition && (
             <Modal
-              id={report.id}
-              iconColor={report.iconColor}
-              userName={report.userName}
-              date={report.date}
-              text={report.text}
+              {...report}
               closeProhibition={closeProhibition}
               sendProhibition={sendProhibition}
             />
