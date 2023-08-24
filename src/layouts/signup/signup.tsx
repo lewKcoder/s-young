@@ -77,7 +77,7 @@ export const SignUp: FunctionComponent = () => {
                           onClick={() => selectColor(colorData[color], color)}
                         >
                           <span className={styles.vote}>
-                            <Image src="/vote-white.svg" alt="voteWhite" />
+                            <Image src="/site-icon-white.svg" alt="voteWhite" />
                           </span>
                         </div>
                       ))}

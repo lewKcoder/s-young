@@ -19,6 +19,15 @@ export const Comment: FunctionComponent = () => {
   const onChange = useOnChange($textarea);
   const createChat = useCreateChat();
 
+  const textareaProp = user
+    ? { rows: 6, onChange: onChange, value: commentValue }
+    : {
+        rows: 10,
+        placeholder: 'コメントの投稿にはログインが必要です。',
+        readOnly: true,
+        disabled: true,
+      };
+
   return (
     <>
       <div className={styles.chat_button} onClick={() => setModal(true)} />
@@ -39,26 +48,12 @@ export const Comment: FunctionComponent = () => {
         <form>
           <h2 className={styles.title}>コメント</h2>
 
-          {user ? (
-            <textarea
-              ref={$textarea}
-              cols={30}
-              rows={6}
-              className={styles.textarea}
-              onChange={onChange}
-              value={commentValue}
-            ></textarea>
-          ) : (
-            <textarea
-              ref={$textarea}
-              cols={30}
-              rows={10}
-              className={styles.textarea}
-              placeholder="コメントの投稿にはログインが必要です。"
-              readOnly
-              disabled
-            ></textarea>
-          )}
+          <textarea
+            ref={$textarea}
+            cols={30}
+            className={styles.textarea}
+            {...textareaProp}
+          ></textarea>
 
           {error && <span className={styles.error}>投稿できない内容が含まれています。</span>}
 
