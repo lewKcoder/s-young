@@ -4,4 +4,10 @@
   font-weight: bold;
   margin: 0 auto 80px;
   max-width: 1080px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 48px;
+    letter-spacing: 4px;
+    margin: 0 auto 40px;
+  }
 }

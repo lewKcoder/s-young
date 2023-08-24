@@ -1,0 +1,1 @@
+export { VoteSP } from './vote';

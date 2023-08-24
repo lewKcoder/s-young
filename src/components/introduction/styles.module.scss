@@ -12,6 +12,12 @@
   &:not(:last-child) {
     margin-bottom: 56px;
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 22px;
+    letter-spacing: 2px;
+    line-height: 40px;
+  }
 }
 
 .link {

@@ -6,12 +6,12 @@ import styles from './styles.module.scss';
 
 export const Thread: FunctionComponent = () => {
   return (
-    <>
+    <div className={styles.container}>
       <Header hasBlur />
-      <div className={styles.container}>
+      <div className={styles.content}>
         <Comment />
         <ThreadItems />
       </div>
-    </>
+    </div>
   );
 };

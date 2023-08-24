@@ -1,3 +1,10 @@
 .container {
   margin-top: 120px;
+  padding: 0 24px;
+
+  @media screen and (max-width: 768px) {
+    margin-top: 56px;
+    padding: 16px;
+    overflow: hidden;
+  }
 }

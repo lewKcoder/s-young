@@ -13,20 +13,17 @@ export const Header: Component = (props) => {
   return (
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>
       <nav className={styles.content}>
-        <div className={`${styles.links} ${styles.left_items}`}>
-          <Link href="/" className={styles.link}>
-            ホーム
-          </Link>
-        </div>
-
-        <Link href="/thread" className={styles.site_title}>
+        <Link href="/" className={styles.site_title}>
           <span className={styles.image}>
             <Image src="/site-icon-black.svg" alt="" />
           </span>
           <h1 className={styles.title}>SEN</h1>
         </Link>
 
-        <div className={`${styles.links} ${styles.right_items}`}>
+        <div className={styles.links}>
+          <Link href="/thread" className={styles.link}>
+            スレッド
+          </Link>
           {user ? (
             <Authenticator>
               {({ signOut }) => (

@@ -1,0 +1,1 @@
+export { VotePC } from './vote';

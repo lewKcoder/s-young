@@ -19,19 +19,24 @@
   height: calc(100vh - 170px);
   overflow-y: auto;
   border: 1px solid #e0e0e0;
+  transition: 0.5s;
 
   @media screen and (max-width: 768px) {
-    display: none;
+    display: block;
+    position: absolute;
+    bottom: -100%;
+    transform: translateY(100%);
+    border-radius: 0;
+    left: 0;
+    padding: 16px;
+    height: auto;
   }
 }
 
 .modal {
-  display: block;
-  position: absolute;
   bottom: 0;
-  border-radius: 0;
-  margin-left: -24px;
-  height: auto;
+  transform: translateY(0);
+  height: calc(100% - 80px);
 }
 
 .user {
@@ -134,7 +139,7 @@
     display: block;
     position: absolute;
     top: 16px;
-    right: 24px;
+    right: 16px;
   }
 }
 

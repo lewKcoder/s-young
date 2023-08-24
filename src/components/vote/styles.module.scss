@@ -1,48 +1,15 @@
-.container {
-  margin: 200px auto 10.5vh;
-  height: 168px;
-  width: 168px;
-  position: relative;
-  z-index: -1;
-  line-height: 1;
+.container_p {
+  display: block;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 }
 
-.vote {
-  width: 100%;
-}
+.container_s {
+  display: none;
 
-.red_card {
-  background-color: #ff5454;
-  border-radius: 8px;
-  position: absolute;
-  top: 110px;
-  left: calc(50% - 59px);
-  width: 63px;
-  height: 97px;
-  transform: rotate(20deg);
-  border: 12px var(--color-black) solid;
-  box-sizing: content-box;
-}
-
-.white_card {
-  position: relative;
-  top: calc(50% + -158px);
-  left: calc(50% - 59px);
-  overflow: hidden;
-  width: 120px;
-  height: 71px;
-}
-
-.white_card_image {
-  position: absolute;
-  top: 0;
-}
-
-.bar {
-  position: absolute;
-  width: 145px;
-  height: 10px;
-  background: var(--color-black);
-  border-radius: 8px;
-  top: 160px;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 }
