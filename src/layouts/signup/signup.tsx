@@ -62,7 +62,7 @@ export const SignUp: FunctionComponent = () => {
                     </p>
                     <div className={styles.icons}>
                       {['color1', 'color2', 'color3'].map((color) => (
-                        <div
+                        <button
                           key={color}
                           className={`${styles.icon} ${color}`}
                           onClick={() => selectColor(colorData[color], color)}
@@ -70,7 +70,7 @@ export const SignUp: FunctionComponent = () => {
                           <span className={styles.vote}>
                             <Image src="/site-icon-white.svg" alt="voteWhite" />
                           </span>
-                        </div>
+                        </button>
                       ))}
                     </div>
                     <button onClick={setColors} className={styles.button}>
