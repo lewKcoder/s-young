@@ -1,10 +1,10 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Header } from '@/components/header';
 import { Image } from '@/components/image';
+import { AuthRedirect } from '@/components/auth-redirect';
 import { I18n } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
-import { useRouter } from 'next/router';
-import { formFields, dict } from './config';
+import { signUpFormFields, dict } from '@/const';
 import { iconColorStore } from '@/stores';
 import { useAtom } from 'jotai';
 import { createGradientCSS } from './utils';
@@ -12,19 +12,10 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import '@aws-amplify/ui-react/styles.css';
 
-I18n.putVocabularies(dict);
-I18n.setLanguage('ja');
-
-const AuthRedirect: FunctionComponent = () => {
-  const router = useRouter();
-  useEffect(() => {
-    router.push('/thread');
-  });
-
-  return null;
-};
-
 export const SignUp: FunctionComponent = () => {
+  I18n.putVocabularies(dict);
+  I18n.setLanguage('ja');
+
   const [iconColor, setIconColor] = useAtom(iconColorStore);
   const [colorData, setColorData] = useState<{ [key: string]: string }>({
     selectColor: 'color1',
@@ -58,7 +49,7 @@ export const SignUp: FunctionComponent = () => {
 
       <div id="amplify-c">
         <Authenticator
-          formFields={formFields}
+          formFields={signUpFormFields}
           initialState="signUp"
           components={{
             SignUp: {

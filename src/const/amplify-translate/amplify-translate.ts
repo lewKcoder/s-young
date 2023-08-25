@@ -1,43 +1,9 @@
-export const formFields = {
-  signUp: {
-    username: {
-      placeholder: '好きなユーザーネームを入力',
-      isRequired: true,
-      label: 'ユーザー名',
-      order: 1,
-    },
-    email: {
-      placeholder: 'email@example.com',
-      isRequired: true,
-      label: 'Eメール',
-      order: 2,
-    },
-    password: {
-      placeholder: '8文字以上のパスワード',
-      isRequired: true,
-      label: 'パスワード',
-      order: 3,
-    },
-    confirm_password: {
-      placeholder: '8文字以上のパスワード',
-      isRequired: true,
-      label: 'パスワード（確認用）',
-      order: 4,
-    },
-  },
-  confirmSignUp: {
-    confirmation_code: {
-      placeholder: '確認コードを入力',
-      label: '',
-    },
-  },
-};
-
 export const dict = {
   ja: {
     'Sign in': 'ログイン',
     'Sign In': 'ログイン',
     'Signing In': 'ログイン中',
+    'Signing in': 'ログイン中',
     'Creating account': 'アカウント作成中',
     'Creating Account': 'アカウント作成中',
     'Sign Out': 'サインアウト',
@@ -47,14 +13,18 @@ export const dict = {
     'Your passwords must match': 'パスワードが一致しません',
     'Forgot your password?': 'パスワードをお忘れですか？',
     'Reset Password': 'パスワードリセット',
-    'Enter your username': 'ユーザーネーム',
+    Username: 'ユーザー名',
+    'Enter your username': 'ユーザー名を入力',
+    'Enter your Username': 'ユーザー名を入力',
     'Username/client id combination not found.': 'ユーザーが見つかりません',
     'User does not exist.': 'ユーザーが見つかりません',
     'Send code': 'リセットする',
     'Back to Sign In': 'ログインはこちら',
     'Email Address *': 'メール *',
     'Phone Number *': '電話番号 *',
+    Password: 'パスワード',
     'Enter your password': 'パスワードを入力',
+    'Enter your Password': 'パスワードを入力',
     'Enter your code': '確認コードを入力',
     'No account?': 'アカウントが未登録ですか？',
     'Reset password': 'パスワードをリセット',
