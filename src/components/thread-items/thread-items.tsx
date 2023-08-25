@@ -3,8 +3,7 @@ import { ThreadSkeltons } from '@/components/thread-skeltons';
 import styles from './styles.module.scss';
 import { Chats, Report, Component } from './types';
 import { Item, Modal } from './component';
-import { LikeChatAPI, SendProhibitionAPI } from '@/data';
-import { useChatSubscription, useFetchChats } from './utils';
+import { useChatSubscription, useFetchChats, LikeChatAPI, SendProhibitionAPI } from './utils';
 
 export const ThreadItems: Component = () => {
   const [chats, setChats] = useState<Chats | []>([]);
