@@ -24,6 +24,9 @@ export const Header: Component = (props) => {
           <Link href="/thread" className={styles.link}>
             スレッド
           </Link>
+          <Link href="/docs" className={styles.link}>
+            ドキュメント
+          </Link>
           {user ? (
             <Authenticator>
               {({ signOut }) => (
