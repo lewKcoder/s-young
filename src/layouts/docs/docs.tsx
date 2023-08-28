@@ -11,12 +11,14 @@ export const Docs: FunctionComponent = () => {
 
       <ul className={styles.container}>
         {indexData.map(({ indexText, lists }) => (
-          <li key={indexText}>
-            <p className={styles.aiueo}>{indexText}行</p>
-            <ul>
+          <li key={indexText} className={styles.content}>
+            <p className={styles.index_title}>{indexText}行</p>
+            <ul className={styles.lists}>
               {lists.map(({ title, href }) => (
                 <li key={title}>
-                  <Link href={href}>{title}</Link>
+                  <Link href={href} className={styles.link}>
+                    {title}
+                  </Link>
                 </li>
               ))}
             </ul>
