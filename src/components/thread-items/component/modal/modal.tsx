@@ -53,7 +53,7 @@ export const Modal: FunctionComponent<
                 }}
               >
                 <span className={styles.vote}>
-                  <Image src="/vote-white.svg" alt="voteWhite" />
+                  <Image src="/site-icon-white.svg" alt="voteWhite" />
                 </span>
               </div>
               <div>
