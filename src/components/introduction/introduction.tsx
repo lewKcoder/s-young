@@ -16,7 +16,7 @@ export const Introduction: FunctionComponent = () => {
         ))}
       </div>
 
-      <Link href={'/thread'} className={styles.link}>
+      <Link href="/thread" className={styles.link}>
         交流する
       </Link>
     </div>
