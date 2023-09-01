@@ -5,10 +5,12 @@ import { userStore } from '@/stores/user';
 import { useAtom } from 'jotai';
 import styles from './styles.module.scss';
 import Link from 'next/link';
+import { useGetListUsers } from './utils';
 
 export const Header: Component = (props) => {
   const { hasBlur } = props;
   const [user, setUser] = useAtom(userStore);
+  const getListUsers = useGetListUsers();
 
   return (
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>
@@ -21,6 +23,9 @@ export const Header: Component = (props) => {
         </Link>
 
         <div className={styles.links}>
+          <p className={styles.users_title}>
+            参加人数<span className={styles.users}>{getListUsers.length}</span>人
+          </p>
           <Link href="/thread" className={styles.link}>
             スレッド
           </Link>
