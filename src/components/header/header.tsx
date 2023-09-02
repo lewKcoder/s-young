@@ -1,16 +1,22 @@
+import { useState, useEffect } from 'react';
+import { useAtom } from 'jotai';
+import Link from 'next/link';
 import { Authenticator } from '@aws-amplify/ui-react';
 import { Image } from '@/components/image';
 import { Component } from './types';
 import { userStore } from '@/stores/user';
-import { useAtom } from 'jotai';
-import styles from './styles.module.scss';
-import Link from 'next/link';
 import { useGetListUsers } from './utils';
+import styles from './styles.module.scss';
 
 export const Header: Component = (props) => {
   const { hasBlur } = props;
   const [user, setUser] = useAtom(userStore);
   const getListUsers = useGetListUsers();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   return (
     <header className={`${styles.container} ${hasBlur && styles.blur}`}>
@@ -32,7 +38,7 @@ export const Header: Component = (props) => {
           <Link href="/docs" className={styles.link}>
             ドキュメント
           </Link>
-          {user ? (
+          {user && isClient ? (
             <Authenticator>
               {({ signOut }) => (
                 <a
