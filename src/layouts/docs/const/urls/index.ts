@@ -1,1 +1,0 @@
-export { indexData } from './urls';

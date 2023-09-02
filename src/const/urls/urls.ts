@@ -1,3 +1,5 @@
+import { Article8362 } from '../articles';
+
 export const indexData = [
   {
     indexText: 'あ',
@@ -88,8 +90,10 @@ export const indexData = [
     indexText: 'か',
     lists: [
       {
-        title: '衆議院',
-        href: '#',
+        title: '権利と義務？',
+        href: '/articles/8362',
+        pageId: '8362',
+        props: Article8362,
       },
       {
         title: '参議院',

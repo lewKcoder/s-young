@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Header } from '@/components/header';
-import { indexData } from './const';
+import { indexData } from '@/const';
 import styles from './styles.module.scss';
 import Link from 'next/link';
 
