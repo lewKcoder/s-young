@@ -51,6 +51,21 @@ export const ArticleElements: Component = (props) => {
             </ul>
           );
         }
+
+        if (
+          htmlType === 'img' &&
+          typeof content !== 'string' &&
+          !Array.isArray(content)
+        ) {
+          return (
+            <img
+              key={content.src}
+              src={content.src}
+              alt={content.alt}
+              className={styles.img}
+            />
+          );
+        }
       })}
     </div>
   );
