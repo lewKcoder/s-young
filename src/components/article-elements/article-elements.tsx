@@ -1,4 +1,5 @@
 import { Component } from './types';
+import { Image } from '@/components/image';
 import styles from './styles.module.scss';
 
 export const ArticleElements: Component = (props) => {
@@ -58,12 +59,9 @@ export const ArticleElements: Component = (props) => {
           !Array.isArray(content)
         ) {
           return (
-            <img
-              key={content.src}
-              src={content.src}
-              alt={content.alt}
-              className={styles.img}
-            />
+            <span key={content.src}>
+              <Image src={content.src} alt={content.alt} />
+            </span>
           );
         }
       })}
