@@ -30,7 +30,8 @@ export const Header: Component = (props) => {
 
         <div className={styles.links}>
           <p className={styles.users_title}>
-            参加人数<span className={styles.users}>{getListUsers.length}</span>人
+            参加人数<span className={styles.users}>{getListUsers.length}</span>
+            人
           </p>
           <Link href="/thread" className={styles.link}>
             スレッド

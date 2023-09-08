@@ -55,7 +55,11 @@ export const Comment: FunctionComponent = () => {
             {...textareaProp}
           ></textarea>
 
-          {error && <span className={styles.error}>投稿できない内容が含まれています。</span>}
+          {error && (
+            <span className={styles.error}>
+              投稿できない内容が含まれています。
+            </span>
+          )}
 
           {user === null ? (
             <Link href="/login" className={styles.login}>

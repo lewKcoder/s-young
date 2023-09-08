@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { Articles as ArticlesLayout } from '@/layouts/articles';
-import type { Props as ArticlesProps } from '@/layouts/articles/types';
+import type { ArticlesProps } from '@/types';
 import { getArticle } from '@/utils';
 
 export default function Articles(props: ArticlesProps) {
@@ -34,5 +34,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export const getStaticPaths: GetStaticPaths = () => {
-  return { paths: [{ params: { id: '8362' } }, { params: { id: '5345' } }], fallback: false };
+  return {
+    paths: [{ params: { id: '8362' } }, { params: { id: '5345' } }],
+    fallback: false,
+  };
 };
