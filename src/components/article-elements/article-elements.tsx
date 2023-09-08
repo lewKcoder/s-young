@@ -1,5 +1,13 @@
 import { Component } from './types';
-import { Image } from '@/components/image';
+import {
+  H1,
+  H2,
+  H3,
+  P,
+  Image as ImageImported,
+  Ul,
+  ReferenceLinks,
+} from './components';
 import styles from './styles.module.scss';
 
 export const ArticleElements: Component = (props) => {
@@ -9,60 +17,31 @@ export const ArticleElements: Component = (props) => {
     <div className={styles.container}>
       {articles.map(({ id, content, htmlType }) => {
         if (htmlType === 'h1') {
-          return (
-            <h1 key={id} className={styles.h1}>
-              {content}
-            </h1>
-          );
-        }
-
-        if (htmlType === 'p') {
-          return (
-            <p key={id} className={styles.p}>
-              {content}
-            </p>
-          );
+          return <H1 key={id} content={content} />;
         }
 
         if (htmlType === 'h2') {
-          return (
-            <h2 key={id} className={styles.h2}>
-              {content}
-            </h2>
-          );
+          return <H2 key={id} content={content} />;
         }
 
         if (htmlType === 'h3') {
-          return (
-            <h3 key={id} className={styles.h3}>
-              {content}
-            </h3>
-          );
+          return <H3 key={id} content={content} />;
+        }
+
+        if (htmlType === 'p') {
+          return <P key={id} content={content} />;
         }
 
         if (htmlType === 'ul') {
-          return (
-            <ul key={id} className={styles.ul}>
-              {Array.isArray(content) &&
-                content.map((item: string) => (
-                  <li key={item} className={styles.li}>
-                    {item}
-                  </li>
-                ))}
-            </ul>
-          );
+          return <Ul key={id} content={content} />;
         }
 
-        if (
-          htmlType === 'img' &&
-          typeof content !== 'string' &&
-          !Array.isArray(content)
-        ) {
-          return (
-            <span key={content.src}>
-              <Image src={content.src} alt={content.alt} />
-            </span>
-          );
+        if (htmlType === 'img') {
+          return <ImageImported key={id} content={content} />;
+        }
+
+        if (htmlType === 'referenceLinks') {
+          return <ReferenceLinks key={id} content={content} />;
         }
       })}
     </div>
