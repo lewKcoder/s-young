@@ -4,8 +4,16 @@ type ArticleContent =
       content: { src: string; alt: string };
     }
   | {
-      htmlType: string;
-      content: string | string[];
+      htmlType: 'referenceLinks';
+      content: { label: string; href: string }[];
+    }
+  | {
+      htmlType: 'ul';
+      content: string[];
+    }
+  | {
+      htmlType: 'h1' | 'h2' | 'h3' | 'p';
+      content: string;
     };
 
 export type ArticlesProps = {
