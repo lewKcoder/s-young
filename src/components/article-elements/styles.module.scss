@@ -2,44 +2,8 @@
   padding: 200px 0px 80px;
   max-width: 880px;
   margin: auto;
-}
 
-.h1 {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 32px;
-}
-
-.h2 {
-  font-size: 22px;
-  font-weight: bold;
-  padding-top: 16px;
-  margin-bottom: 32px;
-}
-
-.h3 {
-  font-size: 18px;
-  font-weight: bold;
-  padding-top: 16px;
-  margin-bottom: 32px;
-}
-
-.p {
-  font-size: 16px;
-  margin-bottom: 24px;
-  line-height: 24px;
-  letter-spacing: 0.4px;
-}
-
-.ul {
-  padding-left: 16px;
-  margin-bottom: 24px;
-  list-style: disc;
-}
-
-.li {
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.4px;
-  padding-bottom: 8px;
+  @media screen and (max-width: 768px) {
+    padding: 120px 24px 80px;
+  }
 }
