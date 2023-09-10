@@ -1,7 +1,7 @@
 type ArticleContent =
   | {
       htmlType: 'img';
-      content: { src: string; alt: string };
+      content: { src: string; alt: string; width?: string; height?: string };
     }
   | {
       htmlType: 'referenceLinks';
