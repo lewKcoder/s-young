@@ -63,15 +63,7 @@ export const Article8362 = [
     ],
   },
   {
-    id: 79428,
-    htmlType: 'img',
-    content: {
-      src: '',
-      alt: '',
-    },
-  },
-  {
-    id: 79428,
+    id: 7248,
     htmlType: 'referenceLinks',
     content: [
       {
